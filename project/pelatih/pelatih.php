@@ -1,18 +1,25 @@
+<?php
+// KONEKSI DATABASE
+include '../../include/koneksi.php';
+?>
+
 <!DOCTYPE html>
 <html lang="id">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Veteran Gym | Membership</title>
+  <title>Veteran Gym | Tim Pelatih</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../asset/style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body>
+
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="../index.php">
@@ -26,106 +33,84 @@
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="../index.php">Beranda</a></li>
           <li class="nav-item"><a class="nav-link" href="../profil/tentang.php">Tentang Kami</a></li>
-          <li class="nav-item"><a class="nav-link" href="membership.php">Membership</a></li>
-          <li class="nav-item"><a class="nav-link" href="../pelatih/pelatih.php">Pelatih</a></li>
+          <li class="nav-item"><a class="nav-link" href="../transaksi/membership.php">Membership</a></li>
+          <li class="nav-item"><a class="nav-link" href="pelatih.php">Pelatih</a></li>
           <li class="nav-item"><a class="nav-link" href="../profil/program.php">Program & Kelas</a></li>
           <li class="nav-item"><a class="nav-link" href="../profil/fasilitas.php">Fasilitas</a></li>
           <li class="nav-item"><a class="nav-link" href="../profil/lokasi.php">Lokasi</a></li>
           <li class="nav-item"><a class="nav-link" href="../artikel/artikel.php">Artikel</a></li>
         </ul>
       </div>
+      <a href="../transaksi/membership.php" class="btn join-btn">Join Now</a>
     </div>
   </nav>
 
-  <main>
-    <section class="membership-section py-5" style="
-        background-image: url('../../image/bkmember2.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: scroll;
-        min-height: 750px;
+  <section class="hero text-center text-light position-relative" style="
+        background: url('../../image/bkpt2.jpg') center center/cover no-repeat;
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         position: relative;
+        overflow: hidden;
     ">
 
-      <div style="
+    <div style="
         position: absolute;
-        background-color: rgba(0, 0, 0, 0.6);
         top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 1;">
-      </div>
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1;
+    "></div>
 
-      <div class="container position-relative" style="z-index: 2;">
-        <h1 class="text-center text-uppercase fw-bold mb-4" style="color: var(--accent-hover);">Pilih Paket Membershipmu</h1>
-        <p class="text-center mb-5 text-light">Sesuaikan kebutuhan latihanmu dengan paket terbaik kami.</p>
+    <div class="container hero-content position-relative" style="z-index: 2;" data-aos="fade-up" data-aos-duration="1000">
+      <h1 class="fw-bold text-uppercase">Pelatih Profesional Siap Membentuk Versi Terbaikmu</h1>
+      <p class="fs-5 mt-3">Latihan lebih fokus, hasil lebih cepat. Bimbingan langsung dari pelatih berpengalaman Veteran Gym.</p>
+    </div>
+  </section>
 
-        <div class="row g-4 justify-content-center">
+  <section id="pelatih-section" class="py-5">
+    <div class="container text-center">
+      <h2 class="section-title mb-5 fw-bold text-uppercase" style="color: var(--accent-hover);" data-aos="zoom-in" data-aos-duration="1000">Tim Pelatih Kami</h2>
+      
+      <div class="row g-4 justify-content-center">
+        
+        <?php 
+        // QUERY DATABASE: Ambil semua pelatih tanpa LIMIT
+        $sql = "SELECT * FROM pelatih";
+        $result = $koneksi->query($sql);
+        
+        // Counter untuk animasi delay AOS
+        $i = 0; 
 
-          <?php
-          include '../../include/koneksi.php';
+        if ($result->num_rows > 0) {
+            while($p = $result->fetch_assoc()) {
+                // Cek foto
+                $foto = !empty($p['foto']) ? $p['foto'] : 'trainer_placeholder.jpg';
+        ?>
 
-          // QUERY DIPERBAIKI: Urutkan Kategori dulu, baru Harga
-          $sql = "SELECT * FROM paket_membership ORDER BY kategori ASC, harga ASC";
-          $result = $koneksi->query($sql);
-
-          if ($result && $result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-              
-              // Format Rupiah
-              $harga_indo = "Rp " . number_format($row['harga'], 0, ',', '.');
-              
-              // Cek Pelatih
-              $is_trainer = ($row['tipe_pelatih'] == 'Dengan Pelatih');
-          ?>
-              
-              <div class="col-md-4">
-                <div class="card bg-dark text-light border-0 shadow-lg h-100 overflow-hidden">
-                  
-                  <div class="card-body d-flex flex-column text-center">
-                    
-                    <h5 class="card-title fw-bold text-uppercase mb-3" style="color: var(--accent-hover); min-height: 50px;">
-                        <?php echo htmlspecialchars($row['nama_paket']); ?>
-                    </h5>
-                    
-                    <h2 class="display-6 fw-bold my-2 text-white"><?php echo $harga_indo; ?></h2>
-                    
-                    <hr class="border-secondary opacity-50">
-
-                    <ul class="list-unstyled text-start mx-auto mb-4 small">
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Akses Gym Unlimited</li>
-                        <li class="mb-2"><i class="bi bi-check-circle-fill text-success me-2"></i> Free Wifi & Air Minum</li>
-                        
-                        <li class="mb-2">
-                            <?php if($is_trainer): ?>
-                                <i class="bi bi-person-check-fill text-warning me-2"></i> <strong class="text-warning">Termasuk Personal Trainer</strong>
-                            <?php else: ?>
-                                <i class="bi bi-x-circle text-secondary me-2"></i> <span class="text-muted">Tanpa Personal Trainer</span>
-                            <?php endif; ?>
-                        </li>
-                    </ul>
-
-                    <div class="mt-auto">
-                        <a href="../auth/daftar.php?paket=<?php echo urlencode($row['nama_paket']); ?>" 
-                           class="btn btn-warning w-100 fw-bold">
-                           Daftar Sekarang
-                        </a>
-                    </div>
-
-                  </div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="<?php echo $i * 100; ?>">
+            <a href="pelatih_detail.php?id=<?php echo $p['id_pelatih']; ?>" class="text-decoration-none">
+                <div class="trainer-card h-100"> <img src="../../image/<?php echo $foto; ?>" alt="<?php echo $p['nama_pelatih']; ?>" class="trainer-img">
+                    <h5 class="trainer-name mt-3"><?php echo $p['nama_pelatih']; ?></h5>
+                    <p class="fw-bold small text-uppercase" style="color: var(--accent);"><?php echo $p['spesialisasi']; ?></p>
+                    <p class="mb-4 small text-light"><?php echo substr($p['deskripsi'], 0, 90); ?>...</p> 
+                    <button class="btn-lihat-detail mt-auto">Lihat Detail</button>
                 </div>
-              </div>
+            </a>
+          </div>
 
-          <?php 
-            }
-          } else {
-            echo "<div class='col-12 text-center text-white'><p>Belum ada paket tersedia saat ini.</p></div>";
-          }
-          $koneksi->close();
-          ?>
+        <?php 
+            $i++; // Increment counter animasi
+            } 
+        } else {
+            echo "<p class='text-center text-light'>Belum ada data pelatih.</p>";
+        }
+        ?>
 
-        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
   <footer>
     <div class="container">
@@ -145,14 +130,14 @@
           <ul class="list-unstyled small mb-0">
             <li><a href="../index.php" class="footer-link d-block py-1">Beranda</a></li>
             <li><a href="../profil/tentang.php" class="footer-link d-block py-1">Tentang Kami</a></li>
-            <li><a href="membership.php" class="footer-link d-block py-1">Membership</a></li>
-            <li><a href="../pelatih/pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
+            <li><a href="../transaksi/membership.php" class="footer-link d-block py-1">Membership</a></li>
+            <li><a href="pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
             <li><a href="../profil/program.php" class="footer-link d-block py-1">Program & Kelas</a></li>
             <li><a href="../profil/fasilitas.php" class="footer-link d-block py-1">Fasilitas</a></li>
             <li><a href="../profil/lokasi.php" class="footer-link d-block py-1">Lokasi</a></li>
             <li><a href="../artikel/artikel.php" class="footer-link d-block py-1">Artikel</a></li>
             <li>
-              <a href="cek_status_membership.php" class="footer-link d-block py-1 text-warning fw-bold">
+              <a href="../transaksi/cek_status_membership.php" class="footer-link d-block py-1 text-warning fw-bold">
                 Cek Status Pembayaran
               </a>
             </li>
@@ -200,7 +185,8 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>AOS.init();</script>
 </body>
 
 </html>

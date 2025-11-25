@@ -21,6 +21,9 @@ main {
   flex: 1;
 }
 
+/* =========================================
+   NAVBAR
+   ========================================= */
 .navbar {
   background: linear-gradient(90deg, #0b0c10, #1f2833);
   box-shadow: 0 2px 10px rgba(102, 252, 241, 0.15);
@@ -29,7 +32,7 @@ main {
   z-index: 9999;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  height: 80px; /* kamu bisa ubah kalau mau lebih tipis */
+  height: 80px;
   display: flex;
   align-items: center;
 }
@@ -38,10 +41,8 @@ main {
   padding: 0 !important;
   display: flex;
   align-items: center;
-  padding: 0;
 }
 
-/* Supaya item nav tetap sejajar tengah meskipun logo besar */
 .navbar-nav {
   align-items: center;
 }
@@ -49,10 +50,10 @@ main {
 .navbar-brand span {
   color: var(--accent);
   font-family: "Bebas Neue", sans-serif;
-  font-size: 1.8rem; /* bisa kamu kecilkan/naikkan sedikit */
+  font-size: 1.8rem;
   font-weight: 600;
-  line-height: 1; /* supaya sejajar vertikal dengan logo */
-  margin-top: 2px; /* bisa atur + atau - untuk penyetelan halus */
+  line-height: 1;
+  margin-top: 2px;
 }
 
 .nav-link {
@@ -68,12 +69,12 @@ main {
 
 @media (max-width: 991px) {
   .navbar-collapse {
-    background-color: var(--section-bg-light); /* warna latar menu dropdown */
+    background-color: var(--section-bg-light);
     position: absolute;
-    top: 80px; /* sejajar dengan bawah navbar */
+    top: 80px;
     left: 0;
     width: 100%;
-    z-index: 999; /* supaya muncul di atas konten hero */
+    z-index: 999;
     padding: 15px 0;
     border-top: 1px solid var(--accent);
   }
@@ -97,8 +98,8 @@ main {
 }
 
 .logo-img {
-  height: 100px; /* atur tinggi sesuai keinginan */
-  width: auto; /* biar proporsional */
+  height: 100px;
+  width: auto;
   object-fit: contain;
 }
 
@@ -139,10 +140,13 @@ main {
   color: var(--accent);
   font-weight: bold;
   font-size: 1.2rem;
-  margin-right: 0; /* hapus jarak default biar lebih rapat */
-  flex-shrink: 0; /* biar logo tidak menyusut */
+  margin-right: 0;
+  flex-shrink: 0;
 }
 
+/* =========================================
+   GENERAL SECTIONS
+   ========================================= */
 section {
   padding: 90px 0;
   transition: background 0.4s ease;
@@ -156,6 +160,9 @@ section {
   text-transform: uppercase;
 }
 
+/* =========================================
+   FOOTER
+   ========================================= */
 footer {
   background: linear-gradient(180deg, #1f2833 0%, #0b0c10 100%);
   color: var(--text-light);
@@ -191,7 +198,9 @@ hr {
   border-color: rgba(102, 252, 241, 0.3);
 }
 
-/* Tagline Section */
+/* =========================================
+   TAGLINE & HERO
+   ========================================= */
 #tagline {
   background-image: url("bahangambar/bkgym1.jpg");
   background-size: cover;
@@ -220,13 +229,50 @@ hr {
   z-index: 2;
 }
 
+/* Hero Section (Halaman Pelatih) */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../image/hero_trainer.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero h1 {
+  color: var(--accent-hover);
+  font-size: 3.2rem;
+  font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  color: var(--text-light);
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   MEMBERSHIP
+   ========================================= */
 @media (max-width: 768px) {
   .membership-container {
     flex-direction: column;
     text-align: center;
     gap: 40px;
   }
-
   .membership-title {
     font-size: 2rem;
   }
@@ -277,7 +323,6 @@ hr {
   margin-bottom: 30px;
 }
 
-/* Tombol mengikuti gaya join-btn kamu */
 #membership-section .join-btn {
   padding: 12px 32px;
   border-radius: 30px;
@@ -289,7 +334,9 @@ hr {
   box-shadow: 0 0 25px rgba(102, 252, 241, 0.6);
 }
 
-/* Section Keunggulan */
+/* =========================================
+   KEUNGGULAN / FEATURES
+   ========================================= */
 #keunggulan {
   background-color: var(--main-bg);
   color: var(--text-light);
@@ -354,64 +401,13 @@ hr {
   box-shadow: 0 0 15px rgba(102, 252, 241, 0.2);
 }
 
-/* Section Pelatih dengan Background */
-#pelatih {
-  background: url("image/bkpt1.jpg");
-  background-size: cover;
-  background-position: center;
-  background-attachment: scroll;
-  min-height: 750px;
-  position: relative;
-  color: #fff;
-}
-
-#pelatih .overlay {
-  position: absolute;
-  background-color: rgba(0, 0, 0, 0.8);
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 1;
-}
-
-/* Kartu pelatih */
-.trainer-card {
-  background-color: rgba(17, 23, 29, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 16px;
-  padding: 20px 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-
-.trainer-card:hover {
-  transform: translateY(-8px);
-  border-color: #00ffc6;
-  box-shadow: 0 0 20px rgba(0, 255, 198, 0.3);
-}
-
-.trainer-img {
-  width: 100%;
-  height: 260px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 12px;
-  transition: all 0.3s ease;
-  object-position: center top;
-}
-
-.trainer-card:hover .trainer-img {
-  filter: grayscale(0%);
-  transform: scale(1.02);
-}
-
-.trainer-name {
-  color: #00ffc6;
-  font-weight: 600;
-  margin-top: 10px;
-  font-size: 1.1rem;
-  letter-spacing: 0.5px;
+/* =========================================
+   ELEMENTS (Cards, Buttons, Inputs)
+   ========================================= */
+.card {
+  background-color: var(--section-bg-light);
+  border: none;
+  color: var(--text-light);
 }
 
 .card:hover {
@@ -464,11 +460,6 @@ body {
   transform: scale(1.05);
 }
 
-body {
-  background-color: #0b0c10;
-  color: #c5c6c7;
-}
-
 .login-card {
   background-color: #1f2833;
   border: 1px solid #66fcf1;
@@ -486,9 +477,22 @@ body {
   min-height: 350px;
 }
 
-/* --- STYLE UNTUK SPINNER --- */
+label {
+  font-weight: 600;
+}
 
-/* Kotak display hadiah */
+.check-icon {
+  font-size: 60px;
+  color: #66fcf1;
+}
+.error-icon {
+  font-size: 60px;
+  color: #ff4c4c;
+}
+
+/* =========================================
+   SPINNER / PRIZE
+   ========================================= */
 #prize-display {
   font-size: 1.5rem;
   font-weight: bold;
@@ -499,25 +503,21 @@ body {
   padding: 40px 20px;
   margin: 30px 0;
   text-align: center;
-  /* Transisi agar perubahan warna mulus */
   transition: all 0.2s ease;
 }
 
-/* Kelas 'spinning' yang ditambahkan oleh JS */
 #prize-display.spinning {
   color: #fff;
   border-color: #fff;
-  /* Efek Ganti-ganti cepat */
   animation: flicker 0.1s infinite;
 }
 
-/* Efek 'selesai' */
 #prize-display.finished {
   color: var(--accent);
   border-color: var(--accent);
   border-style: solid;
   font-size: 1.7rem;
-  animation: none; /* Hentikan flicker */
+  animation: none;
 }
 
 @keyframes flicker {
@@ -532,7 +532,6 @@ body {
   }
 }
 
-/* Tombol Spin */
 .btn-spin {
   background-color: var(--accent);
   color: #000;
@@ -545,21 +544,945 @@ body {
   color: #000;
 }
 
-.card {
-  background-color: var(--section-bg-light);
-  border: none;
+/* =========================================
+   SECTION PELATIH (Halaman Utama Pelatih)
+   ========================================= */
+#pelatih-section {
+  /* Opsi 1: Background Gambar + Overlay Gelap */
+  background: linear-gradient(rgba(11, 12, 16, 0.9), rgba(11, 12, 16, 0.9)),
+    url("../image/bkpt1.jpg");
+  background-size: cover;
+  background-position: center;
+  /* background-attachment: fixed; */ /* Aktifkan jika ingin efek parallax */
+
+  padding: 100px 0;
+
+  /* BORDER PEMISAH DENGAN FOOTER */
+  border-bottom: 1px solid rgba(102, 252, 241, 0.1);
+}
+
+/* Grid System */
+.pelatih-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Card Container */
+.pelatih-card {
+  /* SUDAH DIPERBAIKI (Hapus strip di belakang main-bg) */
+  background-color: var(--main-bg);
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  border-radius: 15px;
+  padding: 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+
+  /* Flexbox Logic agar tombol sejajar bawah */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.pelatih-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(102, 252, 241, 0.25);
+  border-color: var(--accent-hover);
+}
+
+/* Foto Pelatih (Ukuran Kecil untuk Card) */
+.pelatih-foto {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  margin-bottom: 20px;
+
+  /* Center image dalam flex column */
+  margin-left: auto;
+  margin-right: auto;
+  transition: transform 0.3s ease;
+}
+
+.pelatih-card:hover .pelatih-foto {
+  transform: scale(1.05);
+  border-color: var(--accent-hover);
+}
+
+/* Text Styles dalam Card */
+.pelatih-card h4 {
+  color: #fff;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.pelatih-card p {
+  font-size: 0.95rem;
   color: var(--text-light);
 }
 
-label {
-  font-weight: 600;
+.pelatih-card p.spesialisasi {
+  color: var(--accent);
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-.check-icon {
-  font-size: 60px;
-  color: #66fcf1;
+.pelatih-card p.deskripsi {
+  margin-bottom: 25px;
+  color: var(--text-muted);
 }
-.error-icon {
-  font-size: 60px;
-  color: #ff4c4c;
+
+/* Tombol Lihat Detail */
+.btn-lihat-detail {
+  background-color: var(--accent);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  color: #111;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(69, 162, 158, 0.3);
+
+  /* Margin-top auto memaksa tombol turun ke dasar card */
+  margin-top: auto;
+}
+
+.btn-lihat-detail:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.5);
+}
+
+/* =========================================
+   HALAMAN DETAIL PELATIH (Scoped)
+   ========================================= */
+
+/* Keyframes Animasi (Definisi Satu Kali Saja) */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Container Detail Pelatih */
+#detail-pelatih {
+  background-color: var(--main-bg);
+  padding: 100px 0;
+  text-align: center;
+  animation: fadeIn 1.5s ease;
+}
+
+/* Foto Besar Khusus Halaman Detail */
+/* Menggunakan Selector #detail-pelatih .pelatih-foto agar tidak merusak card */
+#detail-pelatih .pelatih-foto {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 25px rgba(102, 252, 241, 0.4);
+  margin-bottom: 30px;
+  animation: zoomIn 1s ease forwards;
+
+  /* Reset margin/posisi */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+
+#detail-pelatih .pelatih-nama {
+  color: var(--accent-hover);
+  font-size: 2.4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  animation: fadeIn 1s ease 0.4s forwards;
+}
+
+#detail-pelatih .pelatih-spesialisasi {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  margin-bottom: 25px;
+  animation: fadeIn 1s ease 0.8s forwards;
+}
+
+#detail-pelatih .pelatih-deskripsi {
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-size: 1.1rem;
+  color: var(--text-light);
+  text-align: justify;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 1s forwards;
+}
+
+#detail-pelatih .btn-kembali {
+  background-color: var(--accent);
+  color: #111;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeIn 1.2s ease 1.4s forwards;
+}
+
+#detail-pelatih .btn-kembali:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.5);
+}
+
+/* Responsive Khusus Halaman Detail */
+@media (max-width: 768px) {
+  #detail-pelatih .pelatih-foto {
+    width: 200px;
+    height: 200px;
+  }
+  #detail-pelatih .pelatih-nama {
+    font-size: 1.8rem;
+  }
+  #detail-pelatih .pelatih-spesialisasi {
+    font-size: 1rem;
+  }
+}
+
+/* =========================================
+   STYLE KHUSUS BERANDA (OLD VERSION)
+   Mengembalikan tampilan lama (.trainer-card)
+   ========================================= */
+
+/* Section Background Lama */
+#pelatih {
+  /* Pastikan path gambar benar */
+  background: url("../image/bkpt1.jpg");
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  min-height: 750px;
+  color: #fff;
+  padding: 100px 0;
+}
+
+#pelatih .overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+#pelatih .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Card Lama (Transparan & Foto Kotak) */
+.trainer-card {
+  background-color: rgba(17, 23, 29, 0.85); /* Warna gelap transparan */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  height: 100%; /* Agar tinggi kartu rata */
+}
+
+.trainer-card:hover {
+  transform: translateY(-8px);
+  border-color: #00ffc6;
+  box-shadow: 0 0 20px rgba(0, 255, 198, 0.3);
+}
+
+/* Foto Lama (Persegi Panjang/Kotak) */
+.trainer-img {
+  width: 100%;
+  height: 260px; /* Tinggi foto fixed */
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  object-position: center;
+}
+
+.trainer-card:hover .trainer-img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+/* Nama Trainer Lama */
+.trainer-name {
+  color: #00ffc6;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================
+   SECTION PROGRAM & KELAS (FIXED LAYOUT)
+   ========================================= */
+
+#program-section {
+  /* Background Gambar + Overlay Gelap */
+  background: linear-gradient(rgba(11, 12, 16, 0.9), rgba(11, 12, 16, 0.9)),
+    url("../image/bkgym2.jpg"); /* Pastikan file gambar ada */
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+  border-bottom: 1px solid rgba(102, 252, 241, 0.1);
+  color: #fff;
+}
+
+.program-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  color: var(--accent-hover);
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.kategori-title {
+  color: var(--accent);
+  border-left: 5px solid var(--accent);
+  padding-left: 15px;
+  margin: 40px 0 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+/* Grid System */
+.program-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* KARTU PROGRAM - FLEXBOX MAGIC */
+.program-card {
+  background-color: var(--section-bg-light); /* Warna kartu */
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  border-radius: 15px;
+  overflow: hidden; /* Supaya gambar tidak keluar radius */
+  transition: all 0.3s ease;
+
+  /* PENTING: Flex Column untuk meratakan tinggi */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.program-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(102, 252, 241, 0.2);
+  border-color: var(--accent-hover);
+}
+
+.program-gambar {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: 10% 30%;
+}
+
+/* CONTENT WRAPPER - FLEXBOX MAGIC PART 2 */
+.program-content {
+  padding: 25px;
+
+  /* Ini membuat konten mengisi sisa ruang kartu */
+  flex: 1;
+
+  /* Menjadikan ini flex container juga */
+  display: flex;
+  flex-direction: column;
+}
+
+.program-judul {
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.program-meta {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.program-deskripsi {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+/* TOMBOL DAFTAR */
+.btn-daftar {
+  background-color: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  padding: 10px 0;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+
+  /* KUNCI SUPAYA SEJAJAR DI BAWAH */
+  margin-top: auto;
+  width: 100%;
+  display: block;
+}
+
+.btn-daftar:hover {
+  background-color: var(--accent);
+  color: #000;
+  box-shadow: 0 0 15px rgba(69, 162, 158, 0.4);
+}
+
+#lokasi-section {
+  background-color: #1a1e21; /* Warna abu-abu gelap/biru malam */
+  padding: 50px 0; /* Memberi jarak atas bawah agar tidak sesak */
+  border-top: 1px solid #333; /* Garis pemisah tipis di atas */
+  border-bottom: 1px solid #333; /* Garis pemisah tipis di bawah */
+}
+.lokasi-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.lokasi-title {
+  color: var(--accent-hover);
+  font-weight: 800;
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.lokasi-grid {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+#map {
+  flex: 2;
+  height: 350px;
+  border-radius: 10px;
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.3);
+}
+.lokasi-info {
+  flex: 1;
+  background-color: var(--main-bg);
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  color: var(--text-light);
+  box-shadow: 0 0 10px rgba(102, 252, 241, 0.15);
+}
+.lokasi-info h3 {
+  color: var(--accent-hover);
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+.lokasi-info p {
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Gallery fasilitas */
+.fasilitas-gallery {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  overflow: hidden;
+  grid-auto-rows: 110px;
+}
+.fasilitas-card {
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(102, 252, 241, 0.25);
+  cursor: pointer;
+  overflow: hidden;
+  filter: drop-shadow(0 0 5px rgba(102, 252, 241, 0.35));
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+.fasilitas-card img {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  filter: brightness(0.65);
+  display: block;
+}
+.fasilitas-label {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  color: var(--accent-hover);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-shadow: 0 0 8px rgba(102, 252, 241, 0.8);
+  user-select: none;
+}
+@keyframes slideLeft {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-15px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+@keyframes slideRight {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(15px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+/* Baris 1: kartu 1-6 geser ke kiri */
+.fasilitas-gallery > :nth-child(-n + 6) {
+  animation-name: slideLeft;
+}
+/* Baris 2: kartu 7-12 geser ke kanan */
+.fasilitas-gallery > :nth-child(n + 7):nth-child(-n + 12) {
+  animation-name: slideRight;
+}
+
+@media (max-width: 768px) {
+  .lokasi-grid {
+    flex-direction: column;
+  }
+  #map {
+    height: 300px;
+    margin-bottom: 30px;
+  }
+  .fasilitas-gallery {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+}
+
+#fasilitas-section {
+  background-color: var(--section-bg-light);
+  padding: 100px 0;
+}
+
+.fasilitas-title {
+  color: var(--accent-hover);
+  font-weight: 800;
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.carousel-item img {
+  height: 500px;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.carousel-caption h5 {
+  color: var(--accent-hover);
+  font-weight: 700;
+}
+
+.carousel-caption p {
+  color: var(--text-light);
+}
+
+/* Section Kelas */
+.kelas-section {
+  padding: 100px 0;
+}
+
+.kelas-title {
+  color: var(--accent-hover);
+  font-weight: 800;
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.kelas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.kelas-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s ease;
+}
+
+.kelas-card:hover {
+  transform: scale(1.05);
+}
+
+.kelas-gambar {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.kelas-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.kelas-card:hover .kelas-overlay {
+  opacity: 1;
+}
+
+.kelas-judul {
+  color: var(--accent-hover);
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.kelas-deskripsi {
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.hero-tentang {
+  background: url("image/hero_tentang.jpg") center/cover no-repeat fixed; /* Parallax */
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+}
+.hero-tentang::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+.hero-tentang h1 {
+  color: var(--accent-hover);
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+/* --- Sejarah & Filosofi --- */
+#sejarah-filosofi::before {
+  background-image: url("image/bg_sejarah.jpg"); /* Ganti dengan gambar sejarah Anda */
+}
+.filosofi-box {
+  background-color: rgba(31, 40, 51, 0.85); /* background-color transparan */
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  border-radius: 10px;
+  padding: 30px;
+  transition: 0.3s;
+  height: 100%;
+}
+.filosofi-box:hover {
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
+}
+.filosofi-box h4 {
+  color: var(--accent);
+  font-weight: 700;
+  border-bottom: 2px solid var(--accent-hover);
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* --- Visi Misi --- */
+#visi-misi::before {
+  background-image: url("image/bg_visi.jpg"); /* Ganti dengan gambar visi misi Anda */
+}
+.visi-box {
+  background-color: rgba(11, 12, 16, 0.85); /* background-color transparan */
+  border-left: 5px solid var(--accent);
+  padding: 30px;
+  border-radius: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.visi-box h3 {
+  color: var(--accent-hover);
+  font-weight: 700;
+}
+.misi-list {
+  background-color: rgba(11, 12, 16, 0.85); /* background-color transparan */
+  padding: 20px;
+  border-radius: 5px;
+  height: 100%;
+}
+.misi-item {
+  padding: 15px 0;
+  border-bottom: 1px dashed rgba(197, 198, 199, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.misi-item:last-child {
+  border-bottom: none;
+}
+.misi-item i {
+  color: var(--accent);
+  font-size: 1.5rem;
+  min-width: 25px;
+}
+
+/* --- Keunggulan --- */
+#keunggulan-section::before {
+  background-image: url("image/bg_keunggulan.jpg"); /* Ganti dengan gambar keunggulan Anda */
+}
+.keunggulan-card {
+  background-color: rgba(31, 40, 51, 0.85); /* background-color transparan */
+  border-radius: 10px;
+  padding: 30px;
+  text-align: center;
+  transition: 0.3s;
+  height: 100%;
+}
+.keunggulan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(102, 252, 241, 0.25);
+}
+.keunggulan-card i {
+  font-size: 3rem;
+  color: var(--accent-hover);
+  margin-bottom: 15px;
+}
+.keunggulan-card h5 {
+  font-weight: 700;
+  color: var(--accent);
+}
+
+#artikel-section {
+  background-color: var(--section-bg-light);
+  padding: 100px 0;
+}
+
+.artikel-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.artikel-title {
+  color: var(--accent-hover);
+  font-weight: 800;
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.artikel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.artikel-card {
+  background-color: var(--main-bg);
+  border: 1px solid rgba(102, 252, 241, 0.2);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.artikel-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(102, 252, 241, 0.3);
+}
+
+.artikel-gambar {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.artikel-content {
+  padding: 20px;
+}
+
+.artikel-judul {
+  color: var(--accent-hover);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.artikel-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 15px;
+}
+
+.artikel-isi {
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.btn-baca-lebih {
+  background-color: var(--accent);
+  color: #111;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-baca-lebih:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+#detail-artikel-section {
+  background-color: var(--section-bg-light);
+  padding: 100px 0;
+}
+
+.detail-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.detail-gambar {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.detail-judul {
+  color: var(--accent-hover);
+  font-weight: 800;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.detail-meta {
+  color: var(--text-muted);
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.detail-isi {
+  color: var(--text-light);
+  line-height: 1.8;
+  font-size: 1.1rem;
+  text-align: justify;
+}
+
+/* Gaya untuk Sumber Berita */
+.detail-sumber {
+  margin-top: 30px;
+  padding: 15px;
+  border-left: 5px solid var(--accent);
+  background-color: var(--main-bg);
+  border-radius: 0 5px 5px 0;
+}
+
+.detail-sumber strong {
+  color: var(--accent-hover);
+  display: block;
+  margin-bottom: 5px;
+}
+
+.detail-sumber span {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.btn-kembali {
+  background-color: var(--accent);
+  color: #111;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 40px;
+}
+
+.btn-kembali:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+  transform: scale(1.05);
 }

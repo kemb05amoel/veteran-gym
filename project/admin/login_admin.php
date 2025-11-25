@@ -1,29 +1,43 @@
 <?php
-// 1. WAJIB: Start Session
 session_start();
 
-include '../../include/koneksi.php';
-
-// Password rahasia
-$admin_password_rahasia = "laharfatkhanbersatu";
-$error_message = "";
-
-// 2. CEK STATUS LOGIN
+// Jika sudah login, langsung lempar ke dashboard
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     header("Location: admin.php");
     exit;
 }
 
-// 3. PROSES LOGIN
+include '../../include/koneksi.php';
+
+$error = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST['password'])) {
-        if ($_POST['password'] === $admin_password_rahasia) {
+    $username = $koneksi->real_escape_string($_POST['username']);
+    $password = $_POST['password'];
+
+    // Cari user berdasarkan username
+    $sql = "SELECT * FROM admin WHERE username = '$username'";
+    $result = $koneksi->query($sql);
+
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+        
+        // Verifikasi Password Hash
+        if (password_verify($password, $row['password'])) {
+            // Password Benar!
             $_SESSION['admin_logged_in'] = true;
+            $_SESSION['admin_nama'] = $row['nama_lengkap']; // Simpan nama admin
+            
+            // Update Last Login (Opsional, biar keren)
+            $koneksi->query("UPDATE admin SET last_login = NOW() WHERE id_admin = " . $row['id_admin']);
+
             header("Location: admin.php");
             exit;
         } else {
-            $error_message = "Password yang Anda masukkan salah.";
+            $error = "Password salah!";
         }
+    } else {
+        $error = "Username tidak ditemukan!";
     }
 }
 ?>
@@ -31,103 +45,115 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Admin - Veteran Gym</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-        background-color: #0b0c10;
-        background-image: url('../../image/bkgym5.jpg');
-        background-size: cover;
-        background-position: center;
-        background-blend-mode: overlay;
-        min-height: 100vh;
-        
-        display: flex;
-        justify-content: center; /* Tengah Horizontal (Kiri-Kanan) */
-        
-        /* --- PERUBAHAN POSISI DISINI --- */
-        align-items: flex-start; /* Jangan 'center', tapi mulai dari atas */
-        padding-top: 100px; /* Atur jarak turun dari atas (bisa diganti misal: 80px atau 150px) */
-        
-        font-family: 'Poppins', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - Veteran Gym</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    .login-card {
-        background-color: rgba(31, 40, 51, 0.95);
-        padding: 40px;
-        border-radius: 15px;
-        box-shadow: 0 0 20px rgba(102, 252, 241, 0.3);
-        border: 1px solid #45a29e;
-        width: 100%;
-        max-width: 400px;
-        
-        /* Opsional: Tambahkan animasi muncul */
-        animation: slideIn 0.5s ease-out;
-    }
-
-    @keyframes slideIn {
-        from { transform: translateY(-20px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
-    .form-control {
-        background-color: #0b0c10;
-        border: 1px solid #45a29e;
-        color: #fff;
-    }
-    
-    .form-control:focus {
-        background-color: #0b0c10;
-        border-color: #66fcf1;
-        color: #fff;
-        box-shadow: 0 0 10px rgba(102, 252, 241, 0.5);
-    }
-
-    .btn-login {
-        background-color: #66fcf1;
-        color: #0b0c10;
-        font-weight: bold;
-        transition: 0.3s;
-    }
-
-    .btn-login:hover {
-        background-color: #45a29e;
-        color: #fff;
-        box-shadow: 0 0 15px #66fcf1;
-    }
-  </style>
+    <style>
+        :root {
+            --bg-dark: #0b0c10;
+            --card-dark: #1f2833;
+            --neon: #66fcf1;
+            --gray: #c5c6c7;
+        }
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        .login-card {
+            background-color: var(--card-dark);
+            width: 100%;
+            max-width: 400px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(102, 252, 241, 0.15); /* Glow effect */
+            border: 1px solid rgba(102, 252, 241, 0.1);
+        }
+        .brand-logo {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+        .form-control {
+            background-color: #0b0c10;
+            border: 1px solid #45a29e;
+            color: #fff;
+        }
+        .form-control:focus {
+            background-color: #0b0c10;
+            border-color: var(--neon);
+            box-shadow: 0 0 10px rgba(102, 252, 241, 0.3);
+            color: #fff;
+        }
+        .btn-login {
+            background-color: var(--neon);
+            color: #0b0c10;
+            font-weight: 700;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+        .btn-login:hover {
+            background-color: #45a29e;
+            box-shadow: 0 0 15px rgba(102, 252, 241, 0.6);
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            color: #45a29e;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover { color: var(--neon); }
+    </style>
 </head>
-
 <body>
 
     <div class="login-card">
-        <div class="text-center mb-4">
-            <h3 class="text-white fw-bold">ADMIN LOGIN</h3>
-            <p class="text-secondary small">Masukkan password untuk akses panel.</p>
+        <div class="text-center">
+            <h3 class="fw-bold text-white mb-4">ADMIN LOGIN</h3>
         </div>
 
-        <?php if (!empty($error_message)): ?>
-            <div class="alert alert-danger text-center py-2 mb-3 small">
-                <?php echo $error_message; ?>
+        <?php if ($error): ?>
+            <div class="alert alert-danger d-flex align-items-center" role="alert">
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                <div><?php echo $error; ?></div>
             </div>
         <?php endif; ?>
 
-        <form action="login_admin.php" method="POST">
-            <div class="mb-4">
-                <label for="password" class="form-label text-info">Password Admin</label>
-                <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="***" required>
+        <form method="POST">
+            <div class="mb-3">
+                <label class="form-label small text-uppercase fw-bold" style="color: var(--neon);">Username</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-dark border-secondary text-light"><i class="bi bi-person-fill"></i></span>
+                    <input type="text" name="username" class="form-control" placeholder="Masukkan username" required>
+                </div>
             </div>
-            
-            <button type="submit" class="btn btn-login w-100 py-2 rounded-3">
-                MASUK SEKARANG
-            </button>
-            
+
+            <div class="mb-3">
+                <label class="form-label small text-uppercase fw-bold" style="color: var(--neon);">Password</label>
+                <div class="input-group">
+                    <span class="input-group-text bg-dark border-secondary text-light"><i class="bi bi-lock-fill"></i></span>
+                    <input type="password" name="password" class="form-control" placeholder="Masukkan password" required>
+                </div>
             </div>
+
+            <button type="submit" class="btn btn-login rounded-pill">MASUK DASHBOARD</button>
         </form>
+
+        <a href="../index.php" class="back-link">
+            <i class="bi bi-arrow-left"></i> Kembali ke Website Utama
+        </a>
     </div>
 
 </body>

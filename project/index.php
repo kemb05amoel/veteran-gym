@@ -1,8 +1,3 @@
-<?php
-// index.php
-// Halaman Beranda Veteran Gym (Tema Military Strength)
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 
@@ -18,7 +13,6 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.php">
@@ -31,13 +25,13 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="index.php">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="tentang.php">Tentang Kami</a></li>
+          <li class="nav-item"><a class="nav-link" href="profil/tentang.php">Tentang Kami</a></li>
           <li class="nav-item"><a class="nav-link" href="transaksi/membership.php">Membership</a></li>
-          <li class="nav-item"><a class="nav-link" href="pelatih.php">Pelatih</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Program & Kelas</a></li>
-          <li class="nav-item"><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
-          <li class="nav-item"><a class="nav-link" href="lokasi.php">Lokasi</a></li>
-          <li class="nav-item"><a class="nav-link" href="artikel.php">Artikel</a></li>
+          <li class="nav-item"><a class="nav-link" href="pelatih/pelatih.php">Pelatih</a></li>
+          <li class="nav-item"><a class="nav-link" href="profil/program.php">Program & Kelas</a></li>
+          <li class="nav-item"><a class="nav-link" href="profil/fasilitas.php">Fasilitas</a></li>
+          <li class="nav-item"><a class="nav-link" href="profil/lokasi.php">Lokasi</a></li>
+          <li class="nav-item"><a class="nav-link" href="artikel/artikel.php">Artikel</a></li>
         </ul>
       </div>
       <a href="transaksi/membership.php" class="btn join-btn">Join Now</a>
@@ -147,59 +141,76 @@
       </div>
     </section>
 
-    <section id="pelatih" class="text-center text-light" style="
-        background-image: url('../image/bkgympt1.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: scroll;
-        min-height: 750px;
-        position: relative;
-    ">
+<section id="pelatih" class="text-center text-light" style="
+    background-image: url('../image/bkgympt1.jpg'); /* Pastikan gambar background ada */
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;
+    min-height: 750px;
+    position: relative;
+    padding: 100px 0;
+">
 
-      <div style="
+    <div class="overlay" style="
         position: absolute;
-        background-color: rgba(0, 0, 0, 0);
+        background-color: rgba(0, 0, 0, 0.7); /* Sedikit lebih gelap sesuai CSS Anda */
         top: 0; left: 0; right: 0; bottom: 0;
         z-index: 1;">
-      </div>
-      <div class="overlay">
-        <div class="container py-5">
-          <h2 class="section-title mb-3">Latih Dirimu Bersama Profesional</h2>
-          <p class="mb-5">Pelatih kami siap memaksimalkan potensimu.</p>
+    </div>
 
-          <div class="row g-4 justify-content-center">
-            <div class="col-md-3 col-sm-6">
-              <div class="trainer-card">
-                <img src="../image/pt1.jpg" alt="Pelatih 1" class="trainer-img">
-                <h5 class="trainer-name">Coach Andika</h5>
-              </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-              <div class="trainer-card">
-                <img src="image/pelatih2.jpg" alt="Pelatih 2" class="trainer-img">
-                <h5 class="trainer-name">Coach Sinta</h5>
-              </div>
-            </div>
+    <div class="container position-relative" style="z-index: 2;">
+        <h2 class="section-title mb-3" style="color: var(--accent-hover); font-weight: 700; text-transform: uppercase;">
+            Latih Dirimu Bersama Profesional
+        </h2>
+        <p class="mb-5 text-light opacity-75">Pelatih kami siap memaksimalkan potensimu.</p>
 
-            <div class="col-md-3 col-sm-6">
-              <div class="trainer-card">
-                <img src="image/pelatih3.jpg" alt="Pelatih 3" class="trainer-img">
-                <h5 class="trainer-name">Coach Rafi</h5>
-              </div>
-            </div>
+        <div class="row g-4 justify-content-center">
 
-            <div class="col-md-3 col-sm-6">
-              <div class="trainer-card">
-                <img src="image/pelatih4.jpg" alt="Pelatih 4" class="trainer-img">
-                <h5 class="trainer-name">Coach Della</h5>
-              </div>
-            </div>
-          </div>
+            <?php
+            // 1. KONEKSI DATABASE
+            include_once '../include/koneksi.php';
 
-          <a href="pelatih.php" class="btn join-btn mt-5">Lihat Semua Pelatih</a>
+            // 2. QUERY: Ambil 4 Pelatih saja untuk halaman depan
+            $sql_home = "SELECT * FROM pelatih LIMIT 4";
+            $result_home = $koneksi->query($sql_home);
+
+            if ($result_home && $result_home->num_rows > 0) {
+                while ($row = $result_home->fetch_assoc()) {
+                    // Cek foto, jika kosong pakai placeholder
+                    $foto = !empty($row['foto']) ? $row['foto'] : 'trainer_placeholder.jpg';
+            ?>
+
+                <div class="col-md-3 col-sm-6">
+                    <a href="pelatih/pelatih_detail.php?id=<?php echo $row['id_pelatih']; ?>" class="text-decoration-none">
+                        
+                        <div class="trainer-card">
+                            <img src="../image/<?php echo $foto; ?>" 
+                                 alt="<?php echo $row['nama_pelatih']; ?>" 
+                                 class="trainer-img">
+                            
+                            <h5 class="trainer-name"><?php echo $row['nama_pelatih']; ?></h5>
+                            
+                            <small class="d-block mt-1" style="color: var(--text-muted); font-size: 0.85rem;">
+                                <?php echo $row['spesialisasi']; ?>
+                            </small>
+                        </div>
+
+                    </a>
+                </div>
+
+            <?php 
+                } // Tutup While
+            } else {
+                echo "<p class='text-white'>Belum ada data pelatih.</p>";
+            }
+            ?>
+
         </div>
-      </div>
-    </section>
+
+        <a href="pelatih/pelatih.php" class="btn join-btn mt-5">Lihat Semua Pelatih</a>
+    </div>
+
+</section>
 
     <section id="fasilitas" class="text-center" style="background-color: var(--section-bg-light);">
       <div class="container">
@@ -218,7 +229,7 @@
                   Nikmati area latihan modern dengan peralatan lengkap untuk setiap level — dari pemula hingga atlet
                   profesional.
                 </p>
-                <a href="fasilitas.php" class="btn join-btn mt-2">Lihat Detail</a>
+                <a href="profil/fasilitas.php" class="btn join-btn mt-2">Lihat Detail</a>
               </div>
             </div>
           </div>
@@ -234,7 +245,7 @@
                   Arena tinju eksklusif dengan ring standar profesional dan pelatih berpengalaman untuk melatih teknik
                   dan ketahananmu.
                 </p>
-                <a href="fasilitas.php" class="btn join-btn mt-2">Lihat Detail</a>
+                <a href="profil/fasilitas.php" class="btn join-btn mt-2">Lihat Detail</a>
               </div>
             </div>
           </div>
@@ -267,7 +278,7 @@
           lokasi strategis, mudah diakses, dan siap menyambut pejuang kebugaran seperti kamu.
         </p>
 
-        <a href="lokasi.php" class="btn join-btn mt-3 mb-5" style="padding: 12px 32px; font-weight: 600;">
+        <a href="profil/lokasi.php" class="btn join-btn mt-3 mb-5" style="padding: 12px 32px; font-weight: 600;">
           Lihat Lokasi
         </a>
 
@@ -300,15 +311,15 @@
           <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Navigasi</h5>
           <ul class="list-unstyled small mb-0">
             <li><a href="index.php" class="footer-link d-block py-1">Beranda</a></li>
-            <li><a href="tentang.php" class="footer-link d-block py-1">Tentang Kami</a></li>
+            <li><a href="profil/tentang.php" class="footer-link d-block py-1">Tentang Kami</a></li>
             <li><a href="transaksi/membership.php" class="footer-link d-block py-1">Membership</a></li>
-            <li><a href="pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
-            <li><a href="program.php" class="footer-link d-block py-1">Program & Kelas</a></li>
-            <li><a href="fasilitas.php" class="footer-link d-block py-1">Fasilitas</a></li>
-            <li><a href="lokasi.php" class="footer-link d-block py-1">Lokasi</a></li>
-            <li><a href="artikel.php" class="footer-link d-block py-1">Artikel</a></li>
+            <li><a href="pelatih/pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
+            <li><a href="profil/program.php" class="footer-link d-block py-1">Program & Kelas</a></li>
+            <li><a href="profil/fasilitas.php" class="footer-link d-block py-1">Fasilitas</a></li>
+            <li><a href="profil/lokasi.php" class="footer-link d-block py-1">Lokasi</a></li>
+            <li><a href="artikel/artikel.php" class="footer-link d-block py-1">Artikel</a></li>
             <li>
-              <a href="admin/cek_status.php" class="footer-link d-block py-1 text-warning fw-bold">
+              <a href="transaksi/cek_status_membership.php" class="footer-link d-block py-1 text-warning fw-bold">
                 Cek Status Pembayaran
               </a>
             </li>

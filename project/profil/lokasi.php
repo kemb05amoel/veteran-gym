@@ -1,32 +1,48 @@
 <?php
-// Taruh ini di paling atas file daftar.php (sebelum HTML)
-// Mengambil data paket dari URL. Jika tidak ada, dikosongkan.
-$paket_dipilih = isset($_GET['paket']) ? htmlspecialchars($_GET['paket']) : '';
+$lokasi = [
+    [
+        'nama' => 'Veteran Gym',
+        'telepon' => '+62 89526002733',
+        'email' => 'Veterangym@gmail.com',
+        'alamat' => 'Jl. Pasar Kembang No.99, Sarkem, Yogyakarta',
+        'lat' => -7.800343,
+        'lng' => 110.365571
+    ]
+];
 
-// Jika user masuk daftar.php tanpa memilih paket, tendang balik ke membership
-if(empty($paket_dipilih)) {
-    header("Location: membership.php");
-    exit;
-}
+$fasilitas = [
+    ['img' => '../../image/wifi.jpg', 'label' => 'Wifi Gratis'],
+    ['img' => '../../image/kelas.jpeg', 'label' => 'Studio Kelas'],
+    ['img' => '../../image/loker.jpeg', 'label' => 'Loker'],
+    ['img' => '../../image/sauna.jpeg', 'label' => 'Sauna Gratis'],
+    ['img' => '../../image/ac.jpg', 'label' => 'Full AC'],
+    ['img' => '../../image/mushola.jpg', 'label' => 'Mushola'],
+    ['img' => '../../image/parkir.jpg', 'label' => 'Parkir Luas'],
+    ['img' => '../../image/kolam.jpg', 'label' => 'Kolam Renang'],
+    ['img' => '../../image/smoking.jpg', 'label' => 'Smoking Area'],
+    ['img' => '../../image/ringboxing.jpeg', 'label' => 'Ring Boxing'],
+    ['img' => '../../image/pilates.jpeg', 'label' => 'Pilates dan Yoga'],
+    ['img' => '../../image/toilet.jpg', 'label' => 'Toilet & Shower'],
+];
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pendaftaran Membership | Veteran Gym</title>
+  <title>Veteran Gym | Beranda</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
   <link rel="stylesheet" href="../../asset/style.css">
 </head>
 
 <body>
 
-  <nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="../index.php">
         <img src="../../image/logogym2.png" alt="Veteran Gym Logo" class="logo-img">
@@ -40,97 +56,41 @@ if(empty($paket_dipilih)) {
           <li class="nav-item"><a class="nav-link" href="../index.php">Beranda</a></li>
           <li class="nav-item"><a class="nav-link" href="tentang.php">Tentang Kami</a></li>
           <li class="nav-item"><a class="nav-link" href="../transaksi/membership.php">Membership</a></li>
-          <li class="nav-item"><a class="nav-link" href="pelatih.php">Pelatih</a></li>
+          <li class="nav-item"><a class="nav-link" href="../pelatih/pelatih.php">Pelatih</a></li>
           <li class="nav-item"><a class="nav-link" href="program.php">Program & Kelas</a></li>
           <li class="nav-item"><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
           <li class="nav-item"><a class="nav-link" href="lokasi.php">Lokasi</a></li>
-          <li class="nav-item"><a class="nav-link" href="artikel.php">Artikel</a></li>
+          <li class="nav-item"><a class="nav-link" href="../artikel/artikel.php">Artikel</a></li>
         </ul>
-
+      </div>
+      <a href="../transaksi/membership.php" class="btn join-btn">Join Now</a>
+    </div>
   </nav>
 
-  <main>
-    <section id="tagline" class="d-flex align-items-center text-light" style="
-        background-image: url('../../image/bkgym2.jpg');
-        background-size: cover;
-        background-position: center;
-        background-attachment: scroll;
-        min-height: 750px;
-        position: relative;
-    ">
+<section id="lokasi-section">
+    <div class="lokasi-container">
+        <h2 class="lokasi-title">Lokasi Veteran Gym </h2>
 
-      <div style="
-        position: absolute;
-        background-color: rgba(0, 0, 0, 0.2);
-        top: 0; left: 0; right: 0; bottom: 0;
-        z-index: 1;">
-      </div>
-
-      <div class="container py-5">
-        <div class="row justify-content-center">
-          <div class="col-lg-6 col-md-8">
-            <div class="card shadow-lg p-4" data-bs-theme="dark">
-              <h2 class="text-center fw-bold mb-4" style="color: var(--accent-hover);">Formulir Pendaftaran</h2>
-
-              <form action="proses_daftar.php" method="POST">
-
-                <div class="mb-3">
-                  <label class="form-label">Nama Lengkap</label>
-                  <input type="text" name="nama" class="form-control" placeholder="Masukkan nama Anda" required>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" name="email" class="form-control" placeholder="example@gmail.com" required>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">No. Telepon / WhatsApp</label>
-                  <input type="text" name="telepon" class="form-control" placeholder="08XXXXXXXXXX" required>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label fw-bold text-warning">Paket Membership Pilihan</label>
-
-                  <input type="text" name="paket" class="form-control bg-secondary text-white fw-bold"
-                    value="<?php echo $paket_dipilih; ?>" readonly>
-
-                  <div class="form-text">
-                    Ingin ganti paket? <a href="../transaksi/membership.php" class="text-warning text-decoration-underline">Klik di
-                      sini</a>
-                  </div>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Pilih Pelatih</label>
-                  <select name="pelatih" class="form-select" required>
-                    <option value="Tidak">Tanpa Pelatih</option>
-                    <option value="Ya">Dengan Pelatih</option>
-                  </select>
-                </div>
-
-                <div class="mb-3">
-                  <label class="form-label">Metode Pembayaran</label>
-                  <select name="pembayaran" class="form-select" required>
-                    <option value="" disabled selected>-- Pilih Metode --</option>
-                    <option value="Transfer Bank">Transfer Bank</option>
-                    <option value="QRIS">QRIS</option>
-                  </select>
-                </div>
-
-                <button type="submit" class="btn btn-warning w-100">Daftar Sekarang</button>
-              </form>
-
-              <div class="text-center mt-3">
-                <a href="../transaksi/membership.php" class="text-decoration-none" style="color: var(--accent-hover);">
-                  <i class="bi bi-arrow-left"></i> Kembali ke Halaman Membership
-                </a>
-              </div>
+        <div class="lokasi-grid">
+            <div id="map"></div>
+            <div class="lokasi-info">
+                <h3><?= htmlspecialchars($lokasi[0]['nama']) ?></h3>
+                <p><i class="bi bi-telephone-fill me-2"></i><?= htmlspecialchars($lokasi[0]['telepon']) ?></p>
+                <p><i class="bi bi-envelope-fill me-2"></i><?= htmlspecialchars($lokasi[0]['email']) ?></p>
+                <p><i class="bi bi-geo-alt-fill me-2"></i><?= htmlspecialchars($lokasi[0]['alamat']) ?></p>
             </div>
-          </div>
         </div>
-      </div>
-  </main>
+
+        <div class="fasilitas-gallery">
+            <?php foreach($fasilitas as $f): ?>
+                <div class="fasilitas-card">
+                    <img src="<?= htmlspecialchars($f['img']) ?>" alt="<?= htmlspecialchars($f['label']) ?>" />
+                    <div class="fasilitas-label"><?= htmlspecialchars($f['label']) ?></div>
+                </div>
+            <?php endforeach ?>
+        </div>
+    </div>
+</section>
 
   <footer>
     <div class="container">
@@ -151,13 +111,13 @@ if(empty($paket_dipilih)) {
             <li><a href="../index.php" class="footer-link d-block py-1">Beranda</a></li>
             <li><a href="tentang.php" class="footer-link d-block py-1">Tentang Kami</a></li>
             <li><a href="../transaksi/membership.php" class="footer-link d-block py-1">Membership</a></li>
-            <li><a href="pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
+            <li><a href="../pelatih/pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
             <li><a href="program.php" class="footer-link d-block py-1">Program & Kelas</a></li>
             <li><a href="fasilitas.php" class="footer-link d-block py-1">Fasilitas</a></li>
             <li><a href="lokasi.php" class="footer-link d-block py-1">Lokasi</a></li>
-            <li><a href="artikel.php" class="footer-link d-block py-1">Artikel</a></li>
+            <li><a href="../artikel/artikel.php" class="footer-link d-block py-1">Artikel</a></li>
             <li>
-              <a href="admin/cek_status.php" class="footer-link d-block py-1 text-warning fw-bold">
+              <a href="../transaksi/cek_status_membership.php" class="footer-link d-block py-1 text-warning fw-bold">
                 Cek Status Pembayaran
               </a>
             </li>
@@ -205,7 +165,19 @@ if(empty($paket_dipilih)) {
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script>
+    const map = L.map('map').setView([<?= $lokasi[0]['lat'] ?>, <?= $lokasi[0]['lng'] ?>], 15);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; OpenStreetMap & CARTO',
+        maxZoom: 19
+    }).addTo(map);
+    L.marker([<?= $lokasi[0]['lat'] ?>, <?= $lokasi[0]['lng'] ?>])
+      .addTo(map)
+      .bindPopup('<b><?= htmlspecialchars($lokasi[0]['nama']) ?></b><br><?= htmlspecialchars($lokasi[0]['alamat']) ?>')
+      .openPopup();
+</script>
 
+</body>
 </html>

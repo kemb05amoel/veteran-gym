@@ -4,16 +4,20 @@ include '../../include/koneksi.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // 1. MENANGKAP DATA (Gunakan operator null coalescing '??' agar tidak error jika kosong)
-    $nama_lengkap   = htmlspecialchars($_POST['nama_lengkap'] ?? '');
-    $email          = htmlspecialchars($_POST['email'] ?? '');
-    $no_telepon = htmlspecialchars($_POST['no_telepon'] ?? ''); // Pastikan di HTML name="paket_membership"
-    $bank_asal      = htmlspecialchars($_POST['bank_asal'] ?? '');
-    $nama_rekening  = htmlspecialchars($_POST['nama_rekening'] ?? '');
+    // 1. MENANGKAP DATA
+    $nama_lengkap     = htmlspecialchars($_POST['nama_lengkap'] ?? '');
+    $email            = htmlspecialchars($_POST['email'] ?? '');
+    $no_telepon       = htmlspecialchars($_POST['no_telepon'] ?? ''); 
+    // --- TAMBAHAN BARU: PAKET MEMBERSHIP ---
+    $paket_membership = htmlspecialchars($_POST['paket_membership'] ?? '');
+    // ---------------------------------------
+    $bank_asal        = htmlspecialchars($_POST['bank_asal'] ?? '');
+    $nama_rekening    = htmlspecialchars($_POST['nama_rekening'] ?? '');
 
     // Cek data wajib (Validasi sederhana)
-    if(empty($nama_lengkap) || empty($email)) {
-        die("Error: Nama Lengkap atau Email tidak terbaca. Cek atribut 'name' di form HTML Anda.");
+    // Tambahkan paket_membership ke validasi agar tidak boleh kosong
+    if(empty($nama_lengkap) || empty($email) || empty($paket_membership)) {
+        die("Error: Data wajib (Nama, Email, atau Paket) belum diisi.");
     }
 
     // 2. PROSES UPLOAD FILE
@@ -22,7 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         $target_dir = "../../uploads/"; 
         
-        // Pastikan folder uploads ada
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
         }
@@ -47,22 +50,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Maaf, bukti pembayaran wajib diupload.");
     }
 
-    // 3. DATABASE INSERT (MENGGUNAKAN GAYA MYSQLI)
-    // Perhatikan: Gunakan tanda tanya (?) bukan (:nama)
+    // 3. DATABASE INSERT
+    // Menambahkan kolom 'paket_membership' ke dalam query
     $sql = "INSERT INTO konfirmasi_pembayaran 
-            (nama_lengkap, email, no_telepon, bank_asal, nama_rekening, file_bukti, status_pembayaran) 
-            VALUES (?, ?, ?, ?, ?, ?, 'Pending')";
+            (nama_lengkap, email, no_telepon, paket_membership, bank_asal, nama_rekening, file_bukti, status_pembayaran) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, 'Pending')";
 
-    // Persiapkan statement
     $stmt = $koneksi->prepare($sql);
 
     if ($stmt) {
-        // "ssssss" artinya ada 6 data bertipe String (String, String, String, String, String, String)
-        $stmt->bind_param("ssssss", $nama_lengkap, $email, $no_telepon, $bank_asal, $nama_rekening, $file_bukti_nama);
+        // Update bind_param:
+        // Sebelumnya "ssssss" (6 item), sekarang menjadi "sssssss" (7 item)
+        // Urutan variabel HARUS sesuai dengan urutan kolom di atas
+        $stmt->bind_param("sssssss", 
+            $nama_lengkap, 
+            $email, 
+            $no_telepon, 
+            $paket_membership, // Variabel baru disisipkan di sini
+            $bank_asal, 
+            $nama_rekening, 
+            $file_bukti_nama
+        );
 
-        // Eksekusi
         if ($stmt->execute()) {
-            // Sukses, redirect
             header("Location: terima_kasih.php");
             exit();
         } else {
@@ -77,7 +87,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $koneksi->close();
 
 } else {
-    // Jika akses langsung tanpa POST
     header("Location: ../index.php");
     exit();
 }

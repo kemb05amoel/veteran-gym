@@ -81,10 +81,44 @@
 
                 <div class="mb-3">
                   <label for="telepon" class="form-label">Nomor WhatsApp / Telepon</label>
-                  <input type="text" id="telepon" name="no_telepon" class="form-control" placeholder="contoh: 081234567890"
-                    required>
+                  <input type="text" id="telepon" name="no_telepon" class="form-control"
+                    placeholder="contoh: 081234567890" required>
                 </div>
 
+                <div class="mb-3">
+                  <label for="paket" class="form-label fw-bold text-warning">Pilih Paket Membership</label>
+                  <select name="paket_membership" id="paket" class="form-select" required>
+                    <option value="" disabled selected>-- Silakan Pilih Paket --</option>
+
+                    <optgroup label="Paket 1 Bulan (Tanpa Pelatih)">
+                      <option value="Membership Gym 1 Bulan Tanpa Pelatih">Gym 1 Bulan (Tanpa Pelatih)</option>
+                      <option value="Membership Boxing 1 Bulan Tanpa Pelatih">Boxing 1 Bulan (Tanpa Pelatih)</option>
+                      <option value="Membership Gym & Boxing 1 Bulan Tanpa Pelatih">Gym & Boxing 1 Bulan (Tanpa Pelatih)
+                      </option>
+                    </optgroup>
+
+                    <optgroup label="Paket 1 Bulan (Dengan Pelatih)">
+                      <option value="Membership Gym 1 Bulan Dengan Pelatih">Gym 1 Bulan (+ Pelatih)</option>
+                      <option value="Membership Boxing 1 Bulan Dengan Pelatih">Boxing 1 Bulan (+ Pelatih)</option>
+                      <option value="Membership Gym & Boxing 1 Bulan Dengan Pelatih">Gym & Boxing 1 Bulan (+ Pelatih)
+                      </option>
+                    </optgroup>
+
+                    <optgroup label="Paket 3 Bulan (Tanpa Pelatih)">
+                      <option value="Membership Gym 3 Bulan Tanpa Pelatih">Gym 3 Bulan (Tanpa Pelatih)</option>
+                      <option value="Membership Boxing 3 Bulan Tanpa Pelatih">Boxing 3 Bulan (Tanpa Pelatih)</option>
+                      <option value="Membership Gym & Boxing 3 Bulan Tanpa Pelatih">Gym & Boxing 3 Bulan (Tanpa Pelatih)
+                      </option>
+                    </optgroup>
+
+                    <optgroup label="Paket 3 Bulan (Dengan Pelatih)">
+                      <option value="Membership Gym 3 Bulan Dengan Pelatih">Gym 3 Bulan (+ Pelatih)</option>
+                      <option value="Membership Boxing 3 Bulan Dengan Pelatih">Boxing 3 Bulan (+ Pelatih)</option>
+                      <option value="Membership Gym & Boxing 3 Bulan Dengan Pelatih">Gym & Boxing 3 Bulan (+ Pelatih)
+                      </option>
+                    </optgroup>
+                  </select>
+                </div>
                 <div class="mb-3">
                   <label for="bank_asal" class="form-label">Bank Asal Transfer</label>
                   <input type="text" class="form-control" id="bank_asal" name="bank_asal"
@@ -101,6 +135,7 @@
                   <label for="bukti_pembayaran" class="form-label">Upload Bukti Transfer (JPG, PNG)</label>
                   <input type="file" class="form-control" id="bukti_pembayaran" name="bukti_pembayaran"
                     accept="image/jpeg, image/png" required>
+                  <div class="form-text text-light opacity-75">Maksimal ukuran file 5MB.</div>
                 </div>
 
                 <button type="submit" class="btn btn-warning w-100 fw-bold">
