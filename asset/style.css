@@ -1,0 +1,565 @@
+:root {
+  --main-bg: #0b0c10;
+  --section-bg-light: #1f2833;
+  --accent: #45a29e;
+  --accent-hover: #66fcf1;
+  --text-light: #c5c6c7;
+  --text-muted: #aab0b3;
+}
+
+html,
+body {
+  background-color: var(--main-bg);
+  color: var(--text-light);
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #0b0c10, #1f2833);
+  box-shadow: 0 2px 10px rgba(102, 252, 241, 0.15);
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  height: 80px; /* kamu bisa ubah kalau mau lebih tipis */
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand {
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}
+
+/* Supaya item nav tetap sejajar tengah meskipun logo besar */
+.navbar-nav {
+  align-items: center;
+}
+
+.navbar-brand span {
+  color: var(--accent);
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 1.8rem; /* bisa kamu kecilkan/naikkan sedikit */
+  font-weight: 600;
+  line-height: 1; /* supaya sejajar vertikal dengan logo */
+  margin-top: 2px; /* bisa atur + atau - untuk penyetelan halus */
+}
+
+.nav-link {
+  color: var(--accent);
+  font-weight: 500;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.nav-link:hover {
+  color: var(--accent-hover);
+  text-shadow: 0 0 8px var(--accent-hover);
+}
+
+@media (max-width: 991px) {
+  .navbar-collapse {
+    background-color: var(--section-bg-light); /* warna latar menu dropdown */
+    position: absolute;
+    top: 80px; /* sejajar dengan bawah navbar */
+    left: 0;
+    width: 100%;
+    z-index: 999; /* supaya muncul di atas konten hero */
+    padding: 15px 0;
+    border-top: 1px solid var(--accent);
+  }
+
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-nav .nav-item {
+    margin: 8px 0;
+  }
+
+  .navbar-toggler {
+    border: none;
+    outline: none;
+  }
+
+  .navbar-toggler:focus {
+    box-shadow: none;
+  }
+}
+
+.logo-img {
+  height: 100px; /* atur tinggi sesuai keinginan */
+  width: auto; /* biar proporsional */
+  object-fit: contain;
+}
+
+.brand-text {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-size: 2rem;
+  color: var(--accent);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.join-btn {
+  background-color: var(--accent);
+  color: #111;
+  font-weight: bold;
+  border-radius: 30px;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 12px rgba(69, 162, 158, 0.4);
+}
+
+.join-btn:hover {
+  background-color: var(--accent-hover);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.6);
+}
+
+.logo-placeholder {
+  width: 45px;
+  height: 45px;
+  background-color: #112427;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-right: 0; /* hapus jarak default biar lebih rapat */
+  flex-shrink: 0; /* biar logo tidak menyusut */
+}
+
+section {
+  padding: 90px 0;
+  transition: background 0.4s ease;
+}
+
+.section-title {
+  color: var(--accent-hover);
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+footer {
+  background: linear-gradient(180deg, #1f2833 0%, #0b0c10 100%);
+  color: var(--text-light);
+  padding-top: 60px;
+}
+
+footer a.footer-link {
+  color: var(--accent);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+footer a.footer-link:hover {
+  color: var(--accent-hover);
+  padding-left: 5px;
+}
+
+.social-icon {
+  color: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--accent-hover);
+  transform: scale(1.2);
+}
+
+footer .border-end {
+  border-color: rgba(102, 252, 241, 0.15) !important;
+}
+
+hr {
+  border-color: rgba(102, 252, 241, 0.3);
+}
+
+/* Tagline Section */
+#tagline {
+  background-image: url("bahangambar/bkgym1.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 750px;
+  position: relative;
+}
+
+#tagline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom right,
+    rgba(10, 20, 30, 0.85),
+    rgba(10, 20, 30, 0.5)
+  );
+  z-index: 1;
+}
+
+#tagline .container {
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .membership-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+
+  .membership-title {
+    font-size: 2rem;
+  }
+}
+
+#membership-section {
+  background-color: var(--section-bg-light);
+  color: var(--text-light);
+  padding: 100px 0;
+}
+
+.membership-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.membership-left {
+  flex: 1;
+}
+
+.membership-title {
+  color: var(--accent-hover);
+  font-weight: 800;
+  font-size: 2.6rem;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.membership-right {
+  flex: 1;
+}
+
+.membership-subtitle {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.membership-right p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+
+/* Tombol mengikuti gaya join-btn kamu */
+#membership-section .join-btn {
+  padding: 12px 32px;
+  border-radius: 30px;
+  font-size: 1rem;
+  box-shadow: 0 0 20px rgba(69, 162, 158, 0.3);
+}
+
+#membership-section .join-btn:hover {
+  box-shadow: 0 0 25px rgba(102, 252, 241, 0.6);
+}
+
+/* Section Keunggulan */
+#keunggulan {
+  background-color: var(--main-bg);
+  color: var(--text-light);
+}
+
+.feature-card {
+  background-color: var(--section-bg-light);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 30px 25px;
+  height: 100%;
+  text-align: left;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  border-color: var(--accent-hover);
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.2);
+}
+
+.feature-icon {
+  font-size: 2rem;
+  color: var(--accent-hover);
+  margin-bottom: 15px;
+}
+
+.feature-card h5 {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.view-details {
+  color: #ffd700;
+  font-weight: 500;
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.view-details:hover {
+  color: var(--accent-hover);
+}
+
+.feature-card.active {
+  border: 1px solid var(--accent);
+  background: linear-gradient(
+    135deg,
+    rgba(102, 252, 241, 0.1),
+    rgba(10, 20, 30, 0.6)
+  );
+  box-shadow: 0 0 15px rgba(102, 252, 241, 0.2);
+}
+
+/* Section Pelatih dengan Background */
+#pelatih {
+  background: url("image/bkpt1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  min-height: 750px;
+  position: relative;
+  color: #fff;
+}
+
+#pelatih .overlay {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* Kartu pelatih */
+.trainer-card {
+  background-color: rgba(17, 23, 29, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.trainer-card:hover {
+  transform: translateY(-8px);
+  border-color: #00ffc6;
+  box-shadow: 0 0 20px rgba(0, 255, 198, 0.3);
+}
+
+.trainer-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+  object-position: center top;
+}
+
+.trainer-card:hover .trainer-img {
+  filter: grayscale(0%);
+  transform: scale(1.02);
+}
+
+.trainer-name {
+  color: #00ffc6;
+  font-weight: 600;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 25px rgba(102, 252, 241, 0.3);
+}
+
+#temukan-kami .p-3:hover {
+  transform: translateY(-8px);
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(102, 252, 241, 0.3);
+}
+
+.btn-success {
+  background-color: var(--accent);
+  border: none;
+  color: var(--text-light);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: 0.3s;
+}
+
+.btn-success:hover {
+  background-color: var(--accent-hover);
+  color: #000;
+}
+
+body {
+  padding-top: 80px;
+}
+
+.qr-img {
+  width: 150px;
+  border: 3px solid var(--accent);
+  border-radius: 10px;
+}
+
+.btn-pay {
+  background-color: var(--accent);
+  color: #000;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: 0.3s;
+}
+
+.btn-pay:hover {
+  background-color: var(--accent-hover);
+  color: #000;
+  transform: scale(1.05);
+}
+
+body {
+  background-color: #0b0c10;
+  color: #c5c6c7;
+}
+
+.login-card {
+  background-color: #1f2833;
+  border: 1px solid #66fcf1;
+  border-radius: 10px;
+  margin-top: 100px;
+  padding: 30px;
+}
+
+.status-container {
+  background-color: #12121a;
+  border: 2px solid var(--accent);
+  border-radius: 15px;
+  padding: 40px;
+  margin-top: 50px;
+  min-height: 350px;
+}
+
+/* --- STYLE UNTUK SPINNER --- */
+
+/* Kotak display hadiah */
+#prize-display {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-light);
+  background-color: #000;
+  border: 2px dashed #444;
+  border-radius: 10px;
+  padding: 40px 20px;
+  margin: 30px 0;
+  text-align: center;
+  /* Transisi agar perubahan warna mulus */
+  transition: all 0.2s ease;
+}
+
+/* Kelas 'spinning' yang ditambahkan oleh JS */
+#prize-display.spinning {
+  color: #fff;
+  border-color: #fff;
+  /* Efek Ganti-ganti cepat */
+  animation: flicker 0.1s infinite;
+}
+
+/* Efek 'selesai' */
+#prize-display.finished {
+  color: var(--accent);
+  border-color: var(--accent);
+  border-style: solid;
+  font-size: 1.7rem;
+  animation: none; /* Hentikan flicker */
+}
+
+@keyframes flicker {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* Tombol Spin */
+.btn-spin {
+  background-color: var(--accent);
+  color: #000;
+  font-weight: bold;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+}
+.btn-spin:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.card {
+  background-color: var(--section-bg-light);
+  border: none;
+  color: var(--text-light);
+}
+
+label {
+  font-weight: 600;
+}
+
+.check-icon {
+  font-size: 60px;
+  color: #66fcf1;
+}
+.error-icon {
+  font-size: 60px;
+  color: #ff4c4c;
+}
