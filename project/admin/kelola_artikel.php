@@ -1,6 +1,5 @@
 <?php
 session_start();
-// Cek Login
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login_admin.php");
     exit;
@@ -8,15 +7,12 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 include '../../include/koneksi.php';
 
-// --- LOGIKA HAPUS ARTIKEL ---
 if (isset($_GET['hapus'])) {
     $id_hapus = $_GET['hapus'];
 
-    // 1. Ambil nama file gambar dulu
     $cek = $koneksi->query("SELECT gambar FROM artikel WHERE id_artikel = $id_hapus");
     $data = $cek->fetch_assoc();
 
-    // 2. Hapus file gambar di folder
     if ($data && !empty($data['gambar'])) {
         $path = "../../image/" . $data['gambar'];
         if (file_exists($path)) {
@@ -24,15 +20,12 @@ if (isset($_GET['hapus'])) {
         }
     }
 
-    // 3. Hapus data di database
     $koneksi->query("DELETE FROM artikel WHERE id_artikel = $id_hapus");
 
-    // Refresh halaman
     header("Location: kelola_artikel.php");
     exit;
 }
 
-// Ambil Data Artikel
 $sql = "SELECT * FROM artikel ORDER BY tanggal DESC";
 $result = $koneksi->query($sql);
 ?>
@@ -64,7 +57,6 @@ $result = $koneksi->query($sql);
             color: #333;
         }
 
-        /* Navbar Styling */
         .navbar {
             background-color: var(--primary-dark) !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -76,7 +68,6 @@ $result = $koneksi->query($sql);
             color: var(--accent-cyan) !important;
         }
 
-        /* Card Styling */
         .dashboard-card {
             background-color: var(--card-bg);
             border: none;
@@ -100,7 +91,6 @@ $result = $koneksi->query($sql);
             padding: 20px;
         }
 
-        /* Table Styling */
         .table thead th {
             background-color: #f8f9fa;
             color: #555;
@@ -115,7 +105,6 @@ $result = $koneksi->query($sql);
             font-size: 0.95rem;
         }
 
-        /* Image Preview Logic */
         .img-preview-container {
             position: relative;
             width: 80px;
@@ -142,7 +131,6 @@ $result = $koneksi->query($sql);
             border: 2px solid white;
         }
 
-        /* Badge & Button Styling */
         .badge {
             font-weight: 500;
             padding: 8px 12px;
@@ -155,7 +143,6 @@ $result = $koneksi->query($sql);
             font-size: 0.9rem;
         }
 
-        /* Header Page */
         .page-title {
             font-weight: 700;
             color: var(--primary-dark);

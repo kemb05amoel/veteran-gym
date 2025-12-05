@@ -1,33 +1,34 @@
 <?php
 $lokasi = [
-    [
-        'nama' => 'Veteran Gym',
-        'telepon' => '+62 89526002733',
-        'email' => 'Veterangym@gmail.com',
-        'alamat' => 'Jl. Pasar Kembang No.99, Sarkem, Yogyakarta',
-        'lat' => -7.800343,
-        'lng' => 110.365571
-    ]
+  [
+    'nama' => 'Veteran Gym',
+    'telepon' => '+62 89526002733',
+    'email' => 'Veterangym@gmail.com',
+    'alamat' => 'Jl. Pasar Kembang No.99, Sarkem, Yogyakarta',
+    'lat' => -7.800343,
+    'lng' => 110.365571
+  ]
 ];
 
 $fasilitas = [
-    ['img' => '../../image/wifi.jpg', 'label' => 'Wifi Gratis'],
-    ['img' => '../../image/kelas.jpeg', 'label' => 'Studio Kelas'],
-    ['img' => '../../image/loker.jpeg', 'label' => 'Loker'],
-    ['img' => '../../image/sauna.jpeg', 'label' => 'Sauna Gratis'],
-    ['img' => '../../image/ac.jpg', 'label' => 'Full AC'],
-    ['img' => '../../image/mushola.jpg', 'label' => 'Mushola'],
-    ['img' => '../../image/parkir.jpg', 'label' => 'Parkir Luas'],
-    ['img' => '../../image/kolam.jpg', 'label' => 'Kolam Renang'],
-    ['img' => '../../image/smoking.jpg', 'label' => 'Smoking Area'],
-    ['img' => '../../image/ringboxing.jpeg', 'label' => 'Ring Boxing'],
-    ['img' => '../../image/pilates.jpeg', 'label' => 'Pilates dan Yoga'],
-    ['img' => '../../image/toilet.jpg', 'label' => 'Toilet & Shower'],
+  ['img' => '../../image/wifi.jpg', 'label' => 'Wifi Gratis'],
+  ['img' => '../../image/kelas.jpeg', 'label' => 'Studio Kelas'],
+  ['img' => '../../image/loker.jpeg', 'label' => 'Loker'],
+  ['img' => '../../image/sauna.jpeg', 'label' => 'Sauna Gratis'],
+  ['img' => '../../image/ac.jpg', 'label' => 'Full AC'],
+  ['img' => '../../image/mushola.jpg', 'label' => 'Mushola'],
+  ['img' => '../../image/parkir.jpg', 'label' => 'Parkir Luas'],
+  ['img' => '../../image/kolam.jpg', 'label' => 'Kolam Renang'],
+  ['img' => '../../image/smoking.jpg', 'label' => 'Smoking Area'],
+  ['img' => '../../image/ringboxing.jpeg', 'label' => 'Ring Boxing'],
+  ['img' => '../../image/pilates.jpeg', 'label' => 'Pilates dan Yoga'],
+  ['img' => '../../image/toilet.jpg', 'label' => 'Toilet & Shower'],
 ];
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,13 +37,13 @@ $fasilitas = [
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
   <link rel="stylesheet" href="../../asset/style.css">
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top">
+  <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="../index.php">
         <img src="../../image/logogym2.png" alt="Veteran Gym Logo" class="logo-img">
@@ -67,30 +68,30 @@ $fasilitas = [
     </div>
   </nav>
 
-<section id="lokasi-section">
+  <section id="lokasi-section">
     <div class="lokasi-container">
-        <h2 class="lokasi-title">Lokasi Veteran Gym </h2>
+      <h2 class="lokasi-title">Lokasi Veteran Gym </h2>
 
-        <div class="lokasi-grid">
-            <div id="map"></div>
-            <div class="lokasi-info">
-                <h3><?= htmlspecialchars($lokasi[0]['nama']) ?></h3>
-                <p><i class="bi bi-telephone-fill me-2"></i><?= htmlspecialchars($lokasi[0]['telepon']) ?></p>
-                <p><i class="bi bi-envelope-fill me-2"></i><?= htmlspecialchars($lokasi[0]['email']) ?></p>
-                <p><i class="bi bi-geo-alt-fill me-2"></i><?= htmlspecialchars($lokasi[0]['alamat']) ?></p>
-            </div>
+      <div class="lokasi-grid">
+        <div id="map"></div>
+        <div class="lokasi-info">
+          <h3><?= htmlspecialchars($lokasi[0]['nama']) ?></h3>
+          <p><i class="bi bi-telephone-fill me-2"></i><?= htmlspecialchars($lokasi[0]['telepon']) ?></p>
+          <p><i class="bi bi-envelope-fill me-2"></i><?= htmlspecialchars($lokasi[0]['email']) ?></p>
+          <p><i class="bi bi-geo-alt-fill me-2"></i><?= htmlspecialchars($lokasi[0]['alamat']) ?></p>
         </div>
+      </div>
 
-        <div class="fasilitas-gallery">
-            <?php foreach($fasilitas as $f): ?>
-                <div class="fasilitas-card">
-                    <img src="<?= htmlspecialchars($f['img']) ?>" alt="<?= htmlspecialchars($f['label']) ?>" />
-                    <div class="fasilitas-label"><?= htmlspecialchars($f['label']) ?></div>
-                </div>
-            <?php endforeach ?>
-        </div>
+      <div class="fasilitas-gallery">
+        <?php foreach ($fasilitas as $f): ?>
+          <div class="fasilitas-card">
+            <img src="<?= htmlspecialchars($f['img']) ?>" alt="<?= htmlspecialchars($f['label']) ?>" />
+            <div class="fasilitas-label"><?= htmlspecialchars($f['label']) ?></div>
+          </div>
+        <?php endforeach ?>
+      </div>
     </div>
-</section>
+  </section>
 
   <footer>
     <div class="container">
@@ -145,11 +146,11 @@ $fasilitas = [
         <div class="col-lg-3 col-md-6 ps-lg-4">
           <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
           <div class="d-flex gap-3 fs-4 mb-3">
-            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+            <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
           </div>
           <p class="small text-secondary mb-0">
             Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.
@@ -165,19 +166,20 @@ $fasilitas = [
     </div>
   </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
-<script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
     const map = L.map('map').setView([<?= $lokasi[0]['lat'] ?>, <?= $lokasi[0]['lng'] ?>], 15);
     L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap & CARTO',
-        maxZoom: 19
+      attribution: '&copy; OpenStreetMap & CARTO',
+      maxZoom: 19
     }).addTo(map);
     L.marker([<?= $lokasi[0]['lat'] ?>, <?= $lokasi[0]['lng'] ?>])
       .addTo(map)
       .bindPopup('<b><?= htmlspecialchars($lokasi[0]['nama']) ?></b><br><?= htmlspecialchars($lokasi[0]['alamat']) ?>')
       .openPopup();
-</script>
+  </script>
 
 </body>
+
 </html>

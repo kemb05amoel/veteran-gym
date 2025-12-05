@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Jika sudah login, langsung lempar ke dashboard
 if (isset($_SESSION['admin_logged_in']) && $_SESSION['admin_logged_in'] === true) {
     header("Location: admin.php");
     exit;
@@ -15,20 +14,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $koneksi->real_escape_string($_POST['username']);
     $password = $_POST['password'];
 
-    // Cari user berdasarkan username
     $sql = "SELECT * FROM admin WHERE username = '$username'";
     $result = $koneksi->query($sql);
 
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
         
-        // Verifikasi Password Hash
         if (password_verify($password, $row['password'])) {
-            // Password Benar!
             $_SESSION['admin_logged_in'] = true;
-            $_SESSION['admin_nama'] = $row['nama_lengkap']; // Simpan nama admin
+            $_SESSION['admin_nama'] = $row['nama_lengkap'];
             
-            // Update Last Login (Opsional, biar keren)
             $koneksi->query("UPDATE admin SET last_login = NOW() WHERE id_admin = " . $row['id_admin']);
 
             header("Location: admin.php");

@@ -25,13 +25,13 @@
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="../index.php">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="tentang.php">Tentang Kami</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/tentang.php">Tentang Kami</a></li>
           <li class="nav-item"><a class="nav-link" href="membership.php">Membership</a></li>
-          <li class="nav-item"><a class="nav-link" href="pelatih.php">Pelatih</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Program & Kelas</a></li>
-          <li class="nav-item"><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
-          <li class="nav-item"><a class="nav-link" href="lokasi.php">Lokasi</a></li>
-          <li class="nav-item"><a class="nav-link" href="artikel.php">Artikel</a></li>
+          <li class="nav-item"><a class="nav-link" href="../pelatih/pelatih.php">Pelatih</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/program.php">Program & Kelas</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/fasilitas.php">Fasilitas</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/lokasi.php">Lokasi</a></li>
+          <li class="nav-item"><a class="nav-link" href="../artikel/artikel.php">Artikel</a></li>
         </ul>
       </div>
       <a href="membership.php" class="btn join-btn">Join Now</a>
@@ -88,12 +88,12 @@
           <ul class="list-unstyled small mb-0">
             <li><a href="../index.php" class="footer-link d-block py-1">Beranda</a></li>
             <li><a href="tentang.php" class="footer-link d-block py-1">Tentang Kami</a></li>
-            <li><a href="membership.php" class="footer-link d-block py-1">Membership</a></li>
-            <li><a href="pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
+            <li><a href="../transaksi/membership.php" class="footer-link d-block py-1">Membership</a></li>
+            <li><a href="../pelatih/pelatih.php" class="footer-link d-block py-1">Pelatih</a></li>
             <li><a href="program.php" class="footer-link d-block py-1">Program & Kelas</a></li>
             <li><a href="fasilitas.php" class="footer-link d-block py-1">Fasilitas</a></li>
             <li><a href="lokasi.php" class="footer-link d-block py-1">Lokasi</a></li>
-            <li><a href="artikel.php" class="footer-link d-block py-1">Artikel</a></li>
+            <li><a href="../artikel/artikel.php" class="footer-link d-block py-1">Artikel</a></li>
             <li>
               <a href="cek_status_membership.php" class="footer-link d-block py-1 text-warning fw-bold">
                 Cek Status Pembayaran
@@ -123,11 +123,11 @@
         <div class="col-lg-3 col-md-6 ps-lg-4">
           <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
           <div class="d-flex gap-3 fs-4 mb-3">
-            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+            <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
           </div>
           <p class="small text-secondary mb-0">
             Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.

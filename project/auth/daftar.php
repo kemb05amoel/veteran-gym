@@ -1,12 +1,9 @@
 <?php
-// Taruh ini di paling atas file daftar.php (sebelum HTML)
-// Mengambil data paket dari URL. Jika tidak ada, dikosongkan.
 $paket_dipilih = isset($_GET['paket']) ? htmlspecialchars($_GET['paket']) : '';
 
-// Jika user masuk daftar.php tanpa memilih paket, tendang balik ke membership
-if(empty($paket_dipilih)) {
-    header("Location: membership.php");
-    exit;
+if (empty($paket_dipilih)) {
+  header("Location: membership.php");
+  exit;
 }
 ?>
 
@@ -38,13 +35,13 @@ if(empty($paket_dipilih)) {
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item"><a class="nav-link" href="../index.php">Beranda</a></li>
-          <li class="nav-item"><a class="nav-link" href="tentang.php">Tentang Kami</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/tentang.php">Tentang Kami</a></li>
           <li class="nav-item"><a class="nav-link" href="../transaksi/membership.php">Membership</a></li>
-          <li class="nav-item"><a class="nav-link" href="pelatih.php">Pelatih</a></li>
-          <li class="nav-item"><a class="nav-link" href="program.php">Program & Kelas</a></li>
-          <li class="nav-item"><a class="nav-link" href="fasilitas.php">Fasilitas</a></li>
-          <li class="nav-item"><a class="nav-link" href="lokasi.php">Lokasi</a></li>
-          <li class="nav-item"><a class="nav-link" href="artikel.php">Artikel</a></li>
+          <li class="nav-item"><a class="nav-link" href="../pelatih/pelatih.php">Pelatih</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/program.php">Program & Kelas</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/fasilitas.php">Fasilitas</a></li>
+          <li class="nav-item"><a class="nav-link" href="../profil/lokasi.php">Lokasi</a></li>
+          <li class="nav-item"><a class="nav-link" href="../artikel/artikel.php">Artikel</a></li>
         </ul>
 
   </nav>
@@ -96,7 +93,8 @@ if(empty($paket_dipilih)) {
                     value="<?php echo $paket_dipilih; ?>" readonly>
 
                   <div class="form-text">
-                    Ingin ganti paket? <a href="../transaksi/membership.php" class="text-warning text-decoration-underline">Klik di
+                    Ingin ganti paket? <a href="../transaksi/membership.php"
+                      class="text-warning text-decoration-underline">Klik di
                       sini</a>
                   </div>
                 </div>
@@ -185,11 +183,11 @@ if(empty($paket_dipilih)) {
         <div class="col-lg-3 col-md-6 ps-lg-4">
           <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
           <div class="d-flex gap-3 fs-4 mb-3">
-            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+            <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
           </div>
           <p class="small text-secondary mb-0">
             Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.

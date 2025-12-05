@@ -7,31 +7,25 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 include '../../include/koneksi.php';
 
-// --- LOGIKA HAPUS PELATIH ---
 if (isset($_GET['hapus'])) {
     $id_hapus = (int)$_GET['hapus'];
     
-    // 1. Ambil nama file gambar lama
     $cek = $koneksi->query("SELECT foto FROM pelatih WHERE id_pelatih = $id_hapus");
     $data = $cek->fetch_assoc();
     
-    // 2. Hapus file fisik
     if ($data && !empty($data['foto'])) {
         $path = "../../image/" . $data['foto'];
-        // Pastikan bukan gambar default placeholder
         if (file_exists($path) && $data['foto'] != 'trainer_placeholder.jpg') { 
             unlink($path); 
         }
     }
     
-    // 3. Hapus database
     $koneksi->query("DELETE FROM pelatih WHERE id_pelatih = $id_hapus");
     
     header("Location: kelola_pelatih.php");
     exit;
 }
 
-// Ambil Data Pelatih
 $sql = "SELECT * FROM pelatih ORDER BY id_pelatih DESC";
 $result = $koneksi->query($sql);
 ?>

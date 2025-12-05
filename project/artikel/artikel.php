@@ -1,5 +1,4 @@
 <?php
-// 1. KONEKSI DATABASE
 include '../../include/koneksi.php';
 ?>
 
@@ -61,30 +60,32 @@ include '../../include/koneksi.php';
                     while ($item = $result->fetch_assoc()) {
                         // Cek gambar (gunakan placeholder jika kosong)
                         $gambar = !empty($item['gambar']) ? $item['gambar'] : 'bkgym1.jpg';
-                        
+
                         // Potong isi artikel (Excerpt) 150 karakter
                         // Menggunakan strip_tags agar tidak ada tag HTML yang bocor
                         $isi_singkat = substr(strip_tags($item['isi_artikel']), 0, 150) . '...';
-                ?>
-                    
-                    <div class="artikel-card">
-                        <img src="../../image/<?php echo $gambar; ?>" alt="<?php echo $item['judul']; ?>" class="artikel-gambar">
-                        
-                        <div class="artikel-content">
-                            <h3 class="artikel-judul"><?php echo $item['judul']; ?></h3>
-                            
-                            <p class="artikel-meta">
-                                Oleh <?php echo $item['penulis']; ?> |
-                                <?php echo date('d M Y', strtotime($item['tanggal'])); ?>
-                            </p>
-                            
-                            <p class="artikel-isi"><?php echo $isi_singkat; ?></p>
-                            
-                            <a href="artikel_detail.php?id=<?php echo $item['id_artikel']; ?>" class="btn-baca-lebih">Baca Lebih Lanjut</a>
-                        </div>
-                    </div>
+                        ?>
 
-                <?php 
+                        <div class="artikel-card">
+                            <img src="../../image/<?php echo $gambar; ?>" alt="<?php echo $item['judul']; ?>"
+                                class="artikel-gambar">
+
+                            <div class="artikel-content">
+                                <h3 class="artikel-judul"><?php echo $item['judul']; ?></h3>
+
+                                <p class="artikel-meta">
+                                    Oleh <?php echo $item['penulis']; ?> |
+                                    <?php echo date('d M Y', strtotime($item['tanggal'])); ?>
+                                </p>
+
+                                <p class="artikel-isi"><?php echo $isi_singkat; ?></p>
+
+                                <a href="artikel_detail.php?id=<?php echo $item['id_artikel']; ?>" class="btn-baca-lebih">Baca
+                                    Lebih Lanjut</a>
+                            </div>
+                        </div>
+
+                    <?php
                     } // End While
                 } else {
                     echo "<p class='text-white text-center w-100'>Belum ada artikel saat ini.</p>";
@@ -148,11 +149,11 @@ include '../../include/koneksi.php';
                 <div class="col-lg-3 col-md-6 ps-lg-4">
                     <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
                     <div class="d-flex gap-3 fs-4 mb-3">
-                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                        <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
                     </div>
                     <p class="small text-secondary mb-0">
                         Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.

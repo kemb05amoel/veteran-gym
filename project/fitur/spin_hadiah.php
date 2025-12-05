@@ -1,25 +1,14 @@
 <?php
-// spin_hadiah.php
-
-// 1. INI WAJIB PALING ATAS
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// 2. KONEKSI DATABASE (Menggunakan include)
-// Sesuaikan path '../' atau '../../' tergantung lokasi file ini.
-// Karena di HTML bawah Anda pakai "../../asset/style.css", kemungkinan path include juga butuh "../../"
 include '../../include/koneksi.php'; 
 
-// Pastikan variabel koneksi di file include namanya $koneksi
-// Jika namanya $conn, ubah baris di bawah ini jadi: $koneksi = $conn;
 
-// --- 3. LOGIKA PENYIMPANAN HADIAH (AJAX HANDLER - POST) ---
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Set header JSON
     header('Content-Type: application/json');
 
-    // Ambil data JSON
     $data = json_decode(file_get_contents('php://input'), true);
 
     if (!isset($data['token']) || !isset($data['hadiah'])) {
@@ -27,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Decode Token
     $user_id = base64_decode($data['token']);
     $hadiah  = htmlspecialchars($data['hadiah']);
 
@@ -36,20 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // --- UBAH KE MYSQLI ---
-    // Cek apakah user sudah klaim
     $sql_check = "SELECT hadiah_diklaim FROM konfirmasi_pembayaran WHERE id = ?";
     $stmt_check = $koneksi->prepare($sql_check);
 
     if ($stmt_check) {
-        $stmt_check->bind_param("i", $user_id); // "i" = integer
+        $stmt_check->bind_param("i", $user_id);
         $stmt_check->execute();
         $result_set = $stmt_check->get_result();
         $result_check = $result_set->fetch_assoc();
 
         if ($result_check && $result_check['hadiah_diklaim'] == 'Belum') {
             
-            // Simpan Hadiah
             $sql_update = "UPDATE konfirmasi_pembayaran 
                            SET hadiah_diklaim = 'Sudah', hasil_hadiah = ? 
                            WHERE id = ?";
@@ -57,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt_update = $koneksi->prepare($sql_update);
             
             if ($stmt_update) {
-                $stmt_update->bind_param("si", $hadiah, $user_id); // "s" string, "i" integer
+                $stmt_update->bind_param("si", $hadiah, $user_id);
                 
                 if ($stmt_update->execute()) {
                     echo json_encode(['success' => true, 'message' => 'Selamat! Hadiah berhasil disimpan.']);
@@ -75,10 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     $koneksi->close();
-    exit; // Stop script
+    exit;
 }
 
-// --- 4. LOGIKA HALAMAN (GET REQUEST) ---
 $message = "";
 $status_level = "danger";
 $show_spinner = false;
@@ -92,7 +76,6 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
     if ($user_id === false) {
         $message = "Token tidak valid.";
     } else {
-        // --- UBAH KE MYSQLI ---
         $sql = "SELECT nama_lengkap, status_pembayaran, hadiah_diklaim, hasil_hadiah
                 FROM konfirmasi_pembayaran 
                 WHERE id = ?";
@@ -110,19 +93,16 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 
                 if ($user['status_pembayaran'] == 'Success') {
                     if ($user['hadiah_diklaim'] == 'Belum') {
-                        // KONDISI IDEAL: BOLEH MAIN
                         $show_spinner = true;
                         $status_level = "dark";
                         $message = "<strong>Selamat datang, $user_name!</strong><br>Anda berhak mendapatkan 1x hadiah selamat datang. Klik tombol di bawah untuk mengundi keberuntungan Anda!";
                         $valid_token = htmlspecialchars($token);
                     } else {
-                        // SUDAH PERNAH MAIN
                         $status_level = "dark";
                         $hasil_hadiah = htmlspecialchars($user['hasil_hadiah']);
                         $message = "<strong>Halo, $user_name.</strong><br>Anda sudah pernah mengklaim hadiah ini dan memenangkan: <strong class='text-warning'>$hasil_hadiah</strong>.";
                     }
                 } else {
-                    // PEMBAYARAN BELUM LUNAS/APPROVED
                     $status_level = "info";
                     $message = "<strong>Halo, $user_name.</strong><br>Status pembayaran Anda belum 'Success' (Masih: " . $user['status_pembayaran'] . "). Anda belum bisa mengklaim hadiah.";
                 }
@@ -137,7 +117,6 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 } else {
     $message = "Akses tidak sah. Token tidak ditemukan.";
 }
-// Tidak perlu tutup koneksi di sini untuk render HTML, tapi opsional
 ?>
 
 <!DOCTYPE html>
@@ -232,7 +211,6 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
       const prizeDisplay = document.getElementById('prize-display');
       const resultMessage = document.getElementById('result-message');
       
-      // Token ini aman karena digenerate dari PHP setelah validasi
       const userToken = '<?php echo $valid_token; ?>';
 
       const prizes = [
@@ -267,7 +245,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
 
       async function savePrize(prizeName) {
         try {
-          const res = await fetch('spin_hadiah.php', { // Pastikan nama file ini benar
+          const res = await fetch('spin_hadiah.php', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({ token: userToken, hadiah: prizeName })

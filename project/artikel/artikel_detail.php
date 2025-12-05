@@ -1,26 +1,18 @@
 <?php
-// 1. KONEKSI DATABASE
 include '../../include/koneksi.php';
 
-// 2. TANGKAP ID DARI URL
-// Menggunakan (int) untuk keamanan agar yang diterima hanya angka
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// 3. QUERY DATABASE BERDASARKAN ID
 $sql = "SELECT * FROM artikel WHERE id_artikel = $id";
 $result = $koneksi->query($sql);
 
-// 4. CEK APAKAH DATA DITEMUKAN?
 if ($result && $result->num_rows > 0) {
     $item = $result->fetch_assoc();
     
-    // Cek gambar, jika kosong gunakan placeholder
     $gambar = !empty($item['gambar']) ? $item['gambar'] : 'bkgym1.jpg';
     
-    // Format Tanggal (Contoh: 01 November 2023)
     $tgl = date('d F Y', strtotime($item['tanggal']));
 } else {
-    // Jika ID tidak ada di database, kembalikan ke daftar artikel
     echo "<script>alert('Maaf, artikel yang Anda cari tidak ditemukan.'); window.location.href='artikel.php';</script>";
     exit;
 }
@@ -152,11 +144,11 @@ if ($result && $result->num_rows > 0) {
         <div class="col-lg-3 col-md-6 ps-lg-4">
           <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
           <div class="d-flex gap-3 fs-4 mb-3">
-            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+            <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
           </div>
           <p class="small text-secondary mb-0">
             Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.

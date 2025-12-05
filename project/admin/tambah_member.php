@@ -1,5 +1,4 @@
 <?php
-// File: project/admin/tambah_member.php
 session_start();
 if (!isset($_SESSION['admin_logged_in'])) {
     header("Location: login_admin.php");
@@ -7,19 +6,15 @@ if (!isset($_SESSION['admin_logged_in'])) {
 }
 include '../../include/koneksi.php';
 
-// Proses saat tombol simpan ditekan
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama = htmlspecialchars($_POST['nama']);
     $email = htmlspecialchars($_POST['email']);
     $telp = htmlspecialchars($_POST['telepon']);
     $paket = htmlspecialchars($_POST['paket']);
-    // Karena bayar di kasir (cash), bank kita set manual atau strip
     $bank = "CASH / TUNAI";
     $rek = "Admin Input";
-    // Tidak perlu upload bukti bayar, kita pakai dummy atau kosongkan
-    $bukti = "cash_payment.png"; // Pastikan Anda punya gambar dummy ini atau biarkan kosong
+    $bukti = "cash_payment.png";
 
-    // Langsung set Success karena admin yang input
     $status = "Success";
 
     $sql = "INSERT INTO konfirmasi_pembayaran (nama_lengkap, email, no_telepon, paket_membership, bank_asal, nama_rekening, file_bukti, status_pembayaran) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -68,9 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="Gym 1 Bulan">Gym 1 Bulan</option>
                         <option value="Boxing 1 Bulan">Boxing 1 Bulan</option>
                         <option value="Gym + Boxing 1 Bulan">Gym + Boxing 1 Bulan</option>
+                        <option value="Gym 1 Bulan (+Pelatih)">Gym 1 Bulan (+Pelatih)</option>
+                        <option value="Boxing 1 Bulan (+Pelatih)">Boxing 1 Bulan (+Pelatih)</option>
+                        <option value="Gym + Boxing 1 Bulan (+Pelatih)">Gym + Boxing 1 Bulan (+Pelatih)</option>
                         <option value="Gym 3 Bulan">Gym 3 Bulan</option>
                         <option value="Boxing 3 Bulan">Boxing 3 Bulan</option>
                         <option value="Gym + Boxing 3 Bulan">Gym + Boxing 3 Bulan</option>
+                        <option value="Gym 3 Bulan (+Pelatih)">Gym 3 Bulan (+Pelatih)</option>
+                        <option value="Boxing 3 Bulan (+Pelatih)">Boxing 3 Bulan (+Pelatih)</option>
+                        <option value="Gym + Boxing 3 Bulan (+Pelatih)">Gym + Boxing 3 Bulan (+Pelatih)</option>
                     </select>
                 </div>
 

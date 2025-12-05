@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// 1. Cek Login
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login_admin.php");
     exit;
@@ -9,7 +8,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 include '../../include/koneksi.php';
 
-// 2. AMBIL DATA LAMA (Berdasarkan ID di URL)
 if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];
     $sql = "SELECT * FROM artikel WHERE id_artikel = $id";
@@ -26,7 +24,6 @@ if (isset($_GET['id'])) {
     exit;
 }
 
-// 3. PROSES UPDATE DATA
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_artikel = $_POST['id_artikel'];
     $judul = htmlspecialchars($_POST['judul']);
@@ -35,9 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $isi = htmlspecialchars($_POST['isi']);
     $gambar_lama = $_POST['gambar_lama'];
 
-    $gambar_baru = $gambar_lama; // Default pakai gambar lama
+    $gambar_baru = $gambar_lama;
 
-    // Cek apakah user upload gambar baru?
     if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] == 0) {
         $target_dir = "../../image/";
         $file_ext = pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION);
@@ -47,9 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $allowed = ['jpg', 'jpeg', 'png', 'webp'];
 
         if (in_array(strtolower($file_ext), $allowed)) {
-            // Upload sukses?
             if (move_uploaded_file($_FILES['gambar']['tmp_name'], $target_file)) {
-                // Hapus gambar lama fisik jika ada dan bukan gambar default
                 if ($gambar_lama != 'bkgym1.jpg' && file_exists($target_dir . $gambar_lama)) {
                     unlink($target_dir . $gambar_lama);
                 }
@@ -60,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Update Database
     $stmt = $koneksi->prepare("UPDATE artikel SET judul=?, penulis=?, tanggal=?, isi_artikel=?, gambar=? WHERE id_artikel=?");
     $stmt->bind_param("sssssi", $judul, $penulis, $tanggal, $isi, $gambar_baru, $id_artikel);
 

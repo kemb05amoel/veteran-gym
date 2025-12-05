@@ -1,12 +1,7 @@
 <?php
-// fasilitas.php
-// Halaman Fasilitas Veteran Gym (Tema Military Strength)
-// Menampilkan fasilitas dengan slider, kelas Gym, dan kelas Boxing
-
-// Simulasi data fasilitas (untuk slider)
 $fasilitas = [
     [
-        'gambar' => '../../image/areabeban.jpg', // Ganti dengan path gambar Anda
+        'gambar' => '../../image/areabeban.jpg',
         'keterangan' => 'Area Latihan Beban Lengkap dengan Peralatan Modern'
     ],
     [
@@ -22,17 +17,16 @@ $fasilitas = [
         'keterangan' => 'Studio Kelas untuk Yoga dan Pilates'
     ],
     [
-        'gambar' => '../../image/parkirluas.jpg', // Ganti dengan path gambar parkir Anda
+        'gambar' => '../../image/parkirluas.jpg',
         'keterangan' => 'Area Parkir Luas dan Aman untuk Member'
     ],
     [
-        'gambar' => '../../image/mushola2.jpg', // Ganti dengan path gambar mushola Anda
+        'gambar' => '../../image/mushola2.jpg',
         'keterangan' => 'Mushola untuk Istirahat dan Ibadah'
     ]
 
 ];
 
-// Simulasi data kelas Gym
 $kelasGym = [
     [
         'judul' => 'Zumba',
@@ -76,7 +70,6 @@ $kelasGym = [
     ]
 ];
 
-// Simulasi data kelas Boxing
 $kelasBoxing = [
     [
         'judul' => 'Teknik Menyerang',
@@ -107,7 +100,6 @@ $kelasBoxing = [
 
 <body>
 
-    <!-- Navbar - Sama seperti index.php -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="../index.php">
@@ -133,7 +125,6 @@ $kelasBoxing = [
         </div>
     </nav>
 
-    <!-- Section Fasilitas -->
     <section id="fasilitas-section">
         <div class="container">
             <h2 class="fasilitas-title">Fasilitas Veteran Gym</h2>
@@ -163,7 +154,6 @@ $kelasBoxing = [
         </div>
     </section>
 
-    <!-- Section Kelas Gym -->
     <section class="kelas-section" style="background-color: var(--main-bg);">
         <div class="container">
             <h2 class="kelas-title">Kelas Gym</h2>
@@ -182,7 +172,6 @@ $kelasBoxing = [
         </div>
     </section>
 
-    <!-- Section Kelas Boxing -->
     <section class="kelas-section" style="background-color: var(--section-bg-light);">
         <div class="container">
             <h2 class="kelas-title">Kelas Boxing</h2>
@@ -201,7 +190,6 @@ $kelasBoxing = [
         </div>
     </section>
 
-    <!-- Footer - Sama seperti index.php -->
     <footer>
         <div class="container">
             <div class="row gy-4 text-start align-items-start">
@@ -256,11 +244,11 @@ $kelasBoxing = [
                 <div class="col-lg-3 col-md-6 ps-lg-4">
                     <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
                     <div class="d-flex gap-3 fs-4 mb-3">
-                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                        <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
                     </div>
                     <p class="small text-secondary mb-0">
                         Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.

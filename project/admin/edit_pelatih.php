@@ -6,7 +6,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 }
 include '../../include/koneksi.php';
 
-// Ambil Data Lama
 if (isset($_GET['id'])) {
     $id = (int) $_GET['id'];
     $sql = "SELECT * FROM pelatih WHERE id_pelatih = $id";
@@ -21,7 +20,6 @@ if (isset($_GET['id'])) {
     exit;
 }
 
-// Proses Update
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id_pelatih = $_POST['id_pelatih'];
     $nama = htmlspecialchars($_POST['nama']);
@@ -32,7 +30,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $foto_lama = $_POST['foto_lama'];
     $foto_baru = $foto_lama;
 
-    // Cek Foto Baru
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
         $target_dir = "../../image/";
         $file_ext = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
@@ -41,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (move_uploaded_file($_FILES['foto']['tmp_name'], $target_file)) {
             if ($foto_lama != 'trainer_placeholder.jpg' && file_exists($target_dir . $foto_lama)) {
-                unlink($target_dir . $foto_lama); // Hapus foto lama
+                unlink($target_dir . $foto_lama);
             }
         }
     }

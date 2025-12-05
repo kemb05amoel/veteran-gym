@@ -1,22 +1,18 @@
 <?php
 session_start();
 
-// Keamanan: Cek Login
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login_admin.php");
     exit;
 }
 
-// --- 1. KONEKSI DATABASE ---
 include '../../include/koneksi.php';
 
-// --- 2. HITUNG STATISTIK (Untuk Widget Atas) ---
 $jml_pending = $koneksi->query("SELECT COUNT(*) as total FROM konfirmasi_pembayaran WHERE status_pembayaran = 'Pending'")->fetch_assoc()['total'];
 $jml_pelatih = $koneksi->query("SELECT COUNT(*) as total FROM pelatih")->fetch_assoc()['total'];
 $jml_artikel = $koneksi->query("SELECT COUNT(*) as total FROM artikel")->fetch_assoc()['total'];
 $jml_program = $koneksi->query("SELECT COUNT(*) as total FROM program_kelas")->fetch_assoc()['total'];
 
-// --- 3. AMBIL DATA PENDING ---
 $pending_list = [];
 $sql_pending = "SELECT * FROM konfirmasi_pembayaran WHERE status_pembayaran = 'Pending' ORDER BY id ASC";
 $result_pending = $koneksi->query($sql_pending);
@@ -26,7 +22,6 @@ if ($result_pending) {
     }
 }
 
-// --- 4. AMBIL DATA HISTORI ---
 $done_list = [];
 $sql_done = "SELECT * FROM konfirmasi_pembayaran WHERE status_pembayaran != 'Pending' ORDER BY id DESC LIMIT 10";
 $result_done = $koneksi->query($sql_done);
@@ -64,7 +59,6 @@ if ($result_done) {
             color: #333;
         }
 
-        /* Navbar Styling */
         .navbar {
             background-color: var(--primary-dark) !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -76,7 +70,6 @@ if ($result_done) {
             color: var(--accent-cyan) !important;
         }
 
-        /* Card Styling */
         .dashboard-card {
             background-color: var(--card-bg);
             border: none;
@@ -100,7 +93,6 @@ if ($result_done) {
             padding: 20px;
         }
 
-        /* Table Styling */
         .table thead th {
             background-color: #f8f9fa;
             color: #555;
@@ -142,7 +134,6 @@ if ($result_done) {
             border: 2px solid white;
         }
 
-        /* Stats Card (Widget Atas) */
         .stat-card {
             border-radius: 12px;
             border: none;
@@ -160,7 +151,6 @@ if ($result_done) {
             opacity: 0.3;
         }
 
-        /* Page Title */
         .page-title {
             font-weight: 700;
             color: var(--primary-dark);

@@ -1,18 +1,14 @@
 <?php
-// 1. KONEKSI DATABASE
 include '../../include/koneksi.php';
 
-// 2. AMBIL DATA DARI DATABASE
 $sql = "SELECT * FROM program_kelas";
 $result = $koneksi->query($sql);
 
-// Masukkan data database ke dalam array $programs agar logika di bawah tetap jalan
 $programs = [];
 if ($result && $result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        // Cek jika gambar kosong, pakai placeholder
         if (empty($row['gambar'])) {
-            $row['gambar'] = 'bkgym2.jpg'; 
+            $row['gambar'] = 'bkgym2.jpg';
         }
         $programs[] = $row;
     }
@@ -60,14 +56,15 @@ if ($result && $result->num_rows > 0) {
     </nav>
 
     <section id="program-section">
-        <div class="container"> <h2 class="program-title text-uppercase text-center mb-3">Program & Kelas Veteran Gym</h2>
+        <div class="container">
+            <h2 class="program-title text-uppercase text-center mb-3">Program & Kelas Veteran Gym</h2>
             <p class="text-center mb-5 mx-auto" style="color: var(--text-muted); max-width: 800px;">
                 Pilih program latihan yang sesuai dengan medan perjuanganmu. Dari gym intensif hingga boxing yang
                 membangun disiplin, kami siap membawamu ke puncak kekuatan.
             </p>
 
             <h3 class="kategori-title">Program Gym</h3>
-            
+
             <div class="program-grid">
                 <?php
                 // Filter array $programs yang datanya sudah diambil dari database
@@ -80,28 +77,28 @@ if ($result && $result->num_rows > 0) {
                 }
 
                 foreach ($gymPrograms as $program):
-                ?>
+                    ?>
                     <div class="program-card">
                         <div style="height: 250px; overflow: hidden;">
-                            <img src="../../image/<?php echo $program['gambar']; ?>" 
-                                 alt="<?php echo $program['judul']; ?>"
-                                 class="program-gambar w-100 h-100 object-fit-cover">
+                            <img src="../../image/<?php echo $program['gambar']; ?>" alt="<?php echo $program['judul']; ?>"
+                                class="program-gambar w-100 h-100 object-fit-cover">
                         </div>
 
                         <div class="program-content">
                             <h4 class="program-judul"><?php echo $program['judul']; ?></h4>
-                            
+
                             <p class="program-meta small mb-3">
-                                <i class="bi bi-clock me-1"></i> <?php echo $program['durasi']; ?> 
-                                <span class="mx-2">|</span> 
+                                <i class="bi bi-clock me-1"></i> <?php echo $program['durasi']; ?>
+                                <span class="mx-2">|</span>
                                 <i class="bi bi-bar-chart me-1"></i> <?php echo $program['level']; ?>
                             </p>
-                            
+
                             <p class="program-deskripsi text-secondary small">
                                 <?php echo $program['deskripsi']; ?>
                             </p>
-                            
-                            <a href="../auth/daftar.php?paket=<?php echo urlencode($program['judul']); ?>" class="btn-daftar mt-auto">
+
+                            <a href="../transaksi/membership.php"
+                                class="btn-daftar mt-auto">
                                 Daftar Sekarang
                             </a>
                         </div>
@@ -110,10 +107,9 @@ if ($result && $result->num_rows > 0) {
             </div>
 
             <h3 class="kategori-title mt-5">Program Boxing</h3>
-            
+
             <div class="program-grid">
                 <?php
-                // Filter data Boxing dari database
                 $boxingPrograms = array_filter($programs, function ($program) {
                     return $program['kategori'] === 'Boxing';
                 });
@@ -123,28 +119,28 @@ if ($result && $result->num_rows > 0) {
                 }
 
                 foreach ($boxingPrograms as $program):
-                ?>
+                    ?>
                     <div class="program-card">
                         <div style="height: 250px; overflow: hidden;">
-                            <img src="../../image/<?php echo $program['gambar']; ?>" 
-                                 alt="<?php echo $program['judul']; ?>"
-                                 class="program-gambar w-100 h-100 object-fit-cover">
+                            <img src="../../image/<?php echo $program['gambar']; ?>" alt="<?php echo $program['judul']; ?>"
+                                class="program-gambar w-100 h-100 object-fit-cover">
                         </div>
 
                         <div class="program-content">
                             <h4 class="program-judul"><?php echo $program['judul']; ?></h4>
-                            
+
                             <p class="program-meta small mb-3">
-                                <i class="bi bi-clock me-1"></i> <?php echo $program['durasi']; ?> 
-                                <span class="mx-2">|</span> 
+                                <i class="bi bi-clock me-1"></i> <?php echo $program['durasi']; ?>
+                                <span class="mx-2">|</span>
                                 <i class="bi bi-bar-chart me-1"></i> <?php echo $program['level']; ?>
                             </p>
-                            
+
                             <p class="program-deskripsi text-secondary small">
                                 <?php echo $program['deskripsi']; ?>
                             </p>
-                            
-                            <a href="../auth/daftar.php?paket=<?php echo urlencode($program['judul']); ?>" class="btn-daftar mt-auto">
+
+                            <a href="../transaksi/membership.php"
+                                class="btn-daftar mt-auto">
                                 Daftar Sekarang
                             </a>
                         </div>
@@ -209,11 +205,11 @@ if ($result && $result->num_rows > 0) {
                 <div class="col-lg-3 col-md-6 ps-lg-4">
                     <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
                     <div class="d-flex gap-3 fs-4 mb-3">
-                        <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+                        <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                        <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
                     </div>
                     <p class="small text-secondary mb-0">
                         Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.

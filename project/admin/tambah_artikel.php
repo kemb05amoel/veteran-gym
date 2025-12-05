@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// 1. Cek Login Admin
 if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
     header("Location: login_admin.php");
     exit;
@@ -9,32 +8,26 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 
 include '../../include/koneksi.php';
 
-// 2. PROSES SIMPAN DATA (Saat tombol Submit ditekan)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    // Tangkap Data Input
     $judul = htmlspecialchars($_POST['judul']);
     $penulis = htmlspecialchars($_POST['penulis']);
     $tanggal = htmlspecialchars($_POST['tanggal']);
-    $isi = htmlspecialchars($_POST['isi']); // Isi artikel boleh panjang
+    $isi = htmlspecialchars($_POST['isi']);
 
-    // 3. PROSES UPLOAD GAMBAR
-    $gambar_nama = "bkgym1.jpg"; // Default jika gagal upload
+    $gambar_nama = "bkgym1.jpg";
 
     if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] == 0) {
         $target_dir = "../../image/";
 
-        // Cek folder, buat jika belum ada
         if (!file_exists($target_dir)) {
             mkdir($target_dir, 0777, true);
         }
 
-        // Rename file agar unik (mencegah nama file kembar)
         $file_ext = pathinfo($_FILES['gambar']['name'], PATHINFO_EXTENSION);
-        $gambar_nama = "artikel_" . time() . "." . $file_ext; // Contoh: artikel_17099999.jpg
+        $gambar_nama = "artikel_" . time() . "." . $file_ext;
         $target_file = $target_dir . $gambar_nama;
 
-        // Validasi tipe file
         $allowed = ['jpg', 'jpeg', 'png', 'webp'];
         if (in_array(strtolower($file_ext), $allowed)) {
             move_uploaded_file($_FILES['gambar']['tmp_name'], $target_file);
@@ -43,12 +36,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // 4. INSERT KE DATABASE
     $stmt = $koneksi->prepare("INSERT INTO artikel (judul, penulis, tanggal, isi_artikel, gambar) VALUES (?, ?, ?, ?, ?)");
     $stmt->bind_param("sssss", $judul, $penulis, $tanggal, $isi, $gambar_nama);
 
     if ($stmt->execute()) {
-        // Jika sukses, kembali ke halaman kelola
         echo "<script>alert('Artikel berhasil ditambahkan!'); window.location.href='kelola_artikel.php';</script>";
     } else {
         echo "<script>alert('Gagal menyimpan artikel.');</script>";
@@ -83,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #333;
         }
 
-        /* Navbar Styling */
         .navbar {
             background-color: var(--primary-dark) !important;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -95,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: var(--accent-cyan) !important;
         }
 
-        /* Card Styling */
         .dashboard-card {
             background-color: #fff;
             /* Card putih agar form jelas */

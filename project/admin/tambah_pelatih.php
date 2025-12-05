@@ -13,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $instagram = htmlspecialchars($_POST['instagram']);
     $no_wa = htmlspecialchars($_POST['no_wa']);
 
-    // Upload Foto
     $foto_nama = "trainer_placeholder.jpg";
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
         $target_dir = "../../image/";

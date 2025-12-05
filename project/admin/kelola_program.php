@@ -5,7 +5,6 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 }
 include '../../include/koneksi.php';
 
-// HAPUS PROGRAM
 if (isset($_GET['hapus'])) {
     $id = (int)$_GET['hapus'];
     $cek = $koneksi->query("SELECT gambar FROM program_kelas WHERE id_program=$id");

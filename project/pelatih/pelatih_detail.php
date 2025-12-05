@@ -1,23 +1,15 @@
 <?php
-// 1. KONEKSI DATABASE
 include '../../include/koneksi.php';
 
-// 2. TANGKAP ID DARI URL
-// Menggunakan (int) untuk keamanan agar yang masuk hanya angka
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-// 3. QUERY DATABASE BERDASARKAN ID
 $sql = "SELECT * FROM pelatih WHERE id_pelatih = $id";
 $result = $koneksi->query($sql);
 
-// 4. CEK APAKAH DATA ADA?
 if ($result && $result->num_rows > 0) {
     $item = $result->fetch_assoc();
-    
-    // Cek foto, jika kosong pakai placeholder
     $foto = !empty($item['foto']) ? $item['foto'] : 'trainer_placeholder.jpg';
 } else {
-    // Jika ID tidak ditemukan, tendang balik ke halaman daftar pelatih
     echo "<script>alert('Data pelatih tidak ditemukan!'); window.location.href='pelatih.php';</script>";
     exit;
 }
@@ -151,11 +143,11 @@ if ($result && $result->num_rows > 0) {
         <div class="col-lg-3 col-md-6 ps-lg-4">
           <h5 class="fw-bold mb-3 text-uppercase border-start border-3 border-warning ps-2">Follow Us</h5>
           <div class="d-flex gap-3 fs-4 mb-3">
-            <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-linkedin"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
+            <a href="https://web.facebook.com/" class="social-icon"><i class="bi bi-facebook"></i></a>
+            <a href="https://x.com/" class="social-icon"><i class="bi bi-twitter"></i></a>
+            <a href="https://www.linkedin.com/" class="social-icon"><i class="bi bi-linkedin"></i></a>
+            <a href="https://www.instagram.com/" class="social-icon"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.youtube.com/" class="social-icon"><i class="bi bi-youtube"></i></a>
           </div>
           <p class="small text-secondary mb-0">
             Ikuti kami untuk promo, tips latihan, dan inspirasi perjuangan setiap hari.
